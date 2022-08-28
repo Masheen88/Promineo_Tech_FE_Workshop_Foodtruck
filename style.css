@@ -1,0 +1,83 @@
+/* Dark/Light Mode - Begin */
+/* Toggles background color based on dark or light mode classes */
+
+body.dark {
+  color: white;
+  background-color: black;
+}
+
+body.light {
+  color: black;
+  background-color: white;
+}
+
+/* Toggles dark/light mode button on dark or light mode classes */
+.darkButton.dark {
+  color: white;
+  background-color: black;
+  border: 1px solid white;
+}
+
+.darkButton.light {
+  color: black;
+  background-color: white;
+  border: 1px solid black;
+}
+/* Dark/Light Mode - End */
+
+/* Project Code Below Here */
+
+#foodTruckImage-1 {
+  min-width: 256px;
+  max-width: 256px;
+}
+
+#truckContainer {
+  min-width: 512px;
+  max-width: 512px;
+}
+
+/* Positions Text on truck */
+.container {
+  position: relative;
+  text-align: center;
+  color: black;
+}
+
+/* Positions Text on the truck - Begin */
+/* Bottom left text */
+.bottom-left {
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+}
+
+/* Top left text */
+.top-left {
+  position: absolute;
+  top: 8px;
+  left: 16px;
+}
+
+/* Top right text */
+.top-right {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+}
+
+/* Bottom right text */
+.bottom-right {
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+}
+
+/* Centered text */
+.centered {
+  position: absolute;
+  top: 6%;
+  left: 42.5%;
+  transform: translate(-50%, -50%);
+}
+/* Positions Text on the truck - End */
