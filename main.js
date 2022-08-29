@@ -104,8 +104,14 @@ function resetTruck() {
 
 //randomizeS the speed of the truck
 function randomizeSpeed() {
-  // return a random number between 1 and 16 seconds
-  return Math.floor(Math.random() * (16000 - 1000 + 1)) + 1000;
+  let randomNumber = Math.floor(Math.random() * 100) + 1;
+  //2% chance to deliver food SUPER FAST!
+  if (randomNumber <= 2) {
+    return Math.floor(Math.random() * (3000 - 1000 + 1)) + 1000;
+  } else {
+    // return a random number between 15 and 30 seconds
+    return Math.floor(Math.random() * (3000 - 1500 + 1)) + 30000;
+  }
 }
 
 //TODO: Need function to build recipe using ingredients and add it to a list (API)
