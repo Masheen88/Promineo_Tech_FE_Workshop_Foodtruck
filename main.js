@@ -21,7 +21,7 @@ function giveMeDarkMode() {
     let darkModeButton = document.getElementById("toggleDarkMode");
     // console.log(darkModeButton);
 
-    // toggle multipe classes on body
+    // toggle multiple classes on body
     let toggleMultipleClasses = function (element, button) {
       // if body is dark, remove dark and moon classes and add light and sun classes
       if (pageBody.classList.contains("dark")) {
@@ -54,14 +54,17 @@ function giveMeDarkMode() {
 //TODO: Animate image to move from the left to right of the screen
 
 let foodTruckContainer1 = document.getElementById("foodTruckContainer-1");
+//start food truck offscreen to the left
+$("#foodTruckContainer-1").css("left", "-1000px");
+
 moveTruck();
 function moveTruck() {
   console.log("truck is 1 is moving");
   $("#foodTruckContainer-1").animate(
     {
-      left: "+=2500", //moves truck from left to right
+      left: "+=3500", //moves truck from left to right
     },
-    16000, //animation speed
+    randomizeSpeed(), //animation speed
     function () {
       // Animation complete.
       resetTruck();
@@ -85,6 +88,12 @@ function resetTruck() {
   );
 }
 
+//randomizeS the speed of the truck
+function randomizeSpeed() {
+  // return a random number between 1 and 16 seconds
+  return Math.floor(Math.random() * (16000 - 1000 + 1)) + 1000;
+}
+
 //TODO: Need function to build recipe using ingredients and add it to a list (API)
 
 //TODO: Allow user to select from list of recipes and order them
@@ -92,6 +101,6 @@ function resetTruck() {
 //TODO: If recipe is out of stock, prevent selection and alert user
 
 //TODO: Allow user to create their own food truck instance and add it a list (API)
-//*Can have 3 receipes for each food truck
+//*Can have 3 recipes for each food truck
 
 //TODO: Display instances of each food truck on the page randomly
