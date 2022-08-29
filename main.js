@@ -9,6 +9,11 @@ function giveMeDarkMode() {
   let bodyDefault = document.getElementsByTagName("body")[0]; //gets the body tag
   let darkModeButtonDefault = document.getElementById("toggleDarkMode");
   bodyDefault.classList.add("dark"); //adds the class "dark" to the body tag
+  let trucklightDefault = document.getElementById("foodtruckHeadlight");
+  trucklightDefault.classList.add("lightOn"); //adds the class "lightOn" to the trucklight tag
+  let trucklightOffDefault = document.getElementById("foodtruckHeadlightOff");
+  trucklightOffDefault.classList.add("lightOff"); //adds the class "lightOff" to the trucklightOff tag
+
   //if dark mode add class moon to body
   if (bodyDefault.classList.contains("dark")) {
     bodyDefault.classList.add("moon");
@@ -28,20 +33,28 @@ function giveMeDarkMode() {
         pageBody.classList.remove("dark");
         pageBody.classList.remove("moon");
         button.classList.remove("dark");
+        trucklightDefault.classList.remove("lightOn");
+        trucklightOffDefault.classList.remove("lightOff");
 
         pageBody.classList.add("light");
         pageBody.classList.add("sun");
         button.classList.add("light");
+        trucklightDefault.classList.add("lightOff");
+        trucklightOffDefault.classList.add("lightOn");
       }
       // if pageBody is light, remove light and sun classes and add dark and moon classes
       else if (pageBody.classList.contains("light")) {
         pageBody.classList.remove("light");
         pageBody.classList.remove("sun");
         button.classList.remove("light");
+        trucklightDefault.classList.remove("lightOff");
+        trucklightOffDefault.classList.remove("lightOn");
 
         pageBody.classList.add("dark");
         pageBody.classList.add("moon");
         button.classList.add("dark");
+        trucklightDefault.classList.add("lightOn");
+        trucklightOffDefault.classList.add("lightOff");
       }
     };
     toggleMultipleClasses(pageBody, darkModeButton);
@@ -49,16 +62,16 @@ function giveMeDarkMode() {
 }
 //* Dark/Light Mode - End
 
-// Rest of Code Goes below here -------------------------------------------------
+//! Rest of Code Goes below here -------------------------------------------------
 
 //TODO: Animate image to move from the left to right of the screen
 
 let foodTruckContainer1 = document.getElementById("foodTruckContainer-1");
 
 //start food truck offscreen to the left
-$("#foodTruckContainer-1").css("left", "-1000px");
+//! $("#foodTruckContainer-1").css("left", "-1000px");
 
-moveTruck();
+// !moveTruck();
 function moveTruck() {
   console.log("truck is 1 is moving");
   $("#foodTruckContainer-1").animate(

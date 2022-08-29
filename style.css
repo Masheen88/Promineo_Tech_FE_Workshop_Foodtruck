@@ -43,6 +43,27 @@ body {
   max-width: 256px;
 }
 
+/* displays when dark mode is enabled */
+img#foodtruckHeadlight {
+  /* margin: 13px; */
+  margin-left: -8px;
+  margin-right: 0px;
+  margin-top: 0px;
+  margin-bottom: 12px;
+}
+
+img#foodtruckHeadlightOff {
+  /* margin: 13px; */
+  margin-left: -8px;
+  margin-right: 0px;
+  margin-top: 0px;
+  margin-bottom: 12px;
+}
+
+.lightOff {
+  display: none;
+}
+
 /* Positions Text on truck */
 .foodTruckContainer {
   position: relative;
@@ -81,11 +102,11 @@ body {
   right: 16px;
 }
 
-/* Centered text */
+/* Centered text ie. Matt's Truck */
 .centered {
   position: absolute;
   top: 6%;
-  left: 42.5%;
+  left: 30%;
   transform: translate(-50%, -50%);
 }
 /* Positions Text on the truck - End */
