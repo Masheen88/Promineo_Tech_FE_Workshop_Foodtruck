@@ -54,6 +54,7 @@ function giveMeDarkMode() {
 //TODO: Animate image to move from the left to right of the screen
 
 let foodTruckContainer1 = document.getElementById("foodTruckContainer-1");
+
 //start food truck offscreen to the left
 $("#foodTruckContainer-1").css("left", "-1000px");
 
@@ -77,7 +78,7 @@ function resetTruck() {
   console.log("truck is 1 is resetting");
   $("#foodTruckContainer-1").animate(
     {
-      left: "-=3500", //moves truck from right to left
+      left: "-=3500", //moves truck from right to left (resets it to offscreen)
     },
     0, //animation speed
     function () {
