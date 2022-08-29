@@ -19,7 +19,7 @@ function giveMeDarkMode() {
   toggleDarkMode.addEventListener("click", function () {
     let pageBody = document.getElementsByTagName("body")[0]; //gets the body element
     let darkModeButton = document.getElementById("toggleDarkMode");
-    console.log(darkModeButton);
+    // console.log(darkModeButton);
 
     // toggle multipe classes on body
     let toggleMultipleClasses = function (element, button) {

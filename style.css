@@ -41,7 +41,7 @@ body.light {
 .container {
   position: relative;
   text-align: center;
-  color: black;
+  /* color: black; */
 }
 
 /* Positions Text on the truck - Begin */
