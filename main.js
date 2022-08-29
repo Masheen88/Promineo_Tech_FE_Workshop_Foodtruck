@@ -53,9 +53,37 @@ function giveMeDarkMode() {
 
 //TODO: Animate image to move from the left to right of the screen
 
-//Animate id foodtruck-1 div to move from the left to right of the screen on load
-let foodtruck1 = document.getElementById("foodtruck-1");
-$("#foodtruck-1").animate({ left: "+=500" }, 2000);
+let foodTruckContainer1 = document.getElementById("foodTruckContainer-1");
+moveTruck();
+function moveTruck() {
+  console.log("truck is 1 is moving");
+  $("#foodTruckContainer-1").animate(
+    {
+      left: "+=2500", //moves truck from left to right
+    },
+    16000, //animation speed
+    function () {
+      // Animation complete.
+      resetTruck();
+    }
+  );
+}
+
+// reset truck to off screen to the left and move it to the right
+function resetTruck() {
+  console.log("truck is 1 is resetting");
+  $("#foodTruckContainer-1").animate(
+    {
+      left: "-=3500", //moves truck from right to left
+    },
+    0, //animation speed
+    function () {
+      // Animation complete.
+      //when truck is reset, move it to the right
+      moveTruck();
+    }
+  );
+}
 
 //TODO: Need function to build recipe using ingredients and add it to a list (API)
 
