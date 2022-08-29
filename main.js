@@ -69,9 +69,9 @@ function giveMeDarkMode() {
 let foodTruckContainer1 = document.getElementById("foodTruckContainer-1");
 
 //start food truck offscreen to the left
-//! $("#foodTruckContainer-1").css("left", "-1000px");
+!$("#foodTruckContainer-1").css("left", "-1000px");
 
-// !moveTruck();
+!moveTruck();
 function moveTruck() {
   console.log("truck is 1 is moving");
   $("#foodTruckContainer-1").animate(
