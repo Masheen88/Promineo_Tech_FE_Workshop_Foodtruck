@@ -27,6 +27,18 @@ body.light {
 
 /* Project Code Below Here */
 
+.navbar .navbar-nav {
+  /* display: inline-block; */
+  float: none;
+  vertical-align: top;
+  /* center navbar horizontally */
+  margin: 0 auto;
+}
+
+.navbar .navbar-collapse {
+  text-align: center;
+}
+
 body {
   width: 100vw;
   height: 100vh;
@@ -34,14 +46,23 @@ body {
 }
 
 #truckRoad {
+  padding-top: 25px;
   width: 100vw;
   height: 100vh;
 }
 
 #truckRoadImage {
+  width: 1920px;
+  height: 1080px;
+  left: 0px;
   top: 125px;
   z-index: -1;
   position: absolute;
+}
+
+#overlayShadow {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("url_of_image");
 }
 
 .foodTruckImage {
@@ -54,7 +75,7 @@ img#foodtruckHeadlight {
   /* margin: 13px; */
   margin-left: -8px;
   margin-right: 0px;
-  margin-top: 0px;
+  margin-top: 82px;
   margin-bottom: 12px;
 }
 
@@ -62,7 +83,7 @@ img#foodtruckHeadlightOff {
   /* margin: 13px; */
   margin-left: -8px;
   margin-right: 0px;
-  margin-top: 0px;
+  margin-top: 82px;
   margin-bottom: 12px;
 }
 

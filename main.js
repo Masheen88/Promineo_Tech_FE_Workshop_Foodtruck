@@ -16,6 +16,9 @@ function giveMeDarkMode() {
   //hide foodTruckCoin
   let foodTruckCoinDefault = document.getElementById("foodTruckCoin"); //gets the foodTruckCoin
   foodTruckCoinDefault.style.display = "none"; //hides the foodTruckCoin
+  let truckRoadImage = document.getElementById("truckRoadImage"); //gets the truckRoadImage
+  //darken truckRoadImage
+  truckRoadImage.style.filter = "brightness(0.2)"; //darkens the truckRoadImage
 
   //if dark mode add class moon to body
   if (bodyDefault.classList.contains("dark")) {
@@ -27,37 +30,55 @@ function giveMeDarkMode() {
   toggleDarkMode.addEventListener("click", function () {
     let pageBody = document.getElementsByTagName("body")[0]; //gets the body element
     let darkModeButton = document.getElementById("toggleDarkMode");
+
     // console.log(darkModeButton);
 
     // toggle multiple classes on body
-    let toggleMultipleClasses = function (element, button) {
+    let toggleMultipleClasses = function (button) {
+      let navbar = document.getElementById("navbar");
       // if body is dark, remove dark and moon classes and add light and sun classes
       if (pageBody.classList.contains("dark")) {
+        navbar.classList.remove("bg-black");
+        navbar.classList.remove("navbar-dark");
+
         pageBody.classList.remove("dark");
         pageBody.classList.remove("moon");
         button.classList.remove("dark");
+        navbar.classList.remove("bg-dark");
         trucklightDefault.classList.remove("lightOn");
         trucklightOffDefault.classList.remove("lightOff");
+        //set navbar to bg-light
 
+        navbar.classList.add("bg-light");
+        navbar.classList.add("navbar-light");
         pageBody.classList.add("light");
         pageBody.classList.add("sun");
         button.classList.add("light");
         trucklightDefault.classList.add("lightOff");
         trucklightOffDefault.classList.add("lightOn");
+        //bright truckRoadImage
+        truckRoadImage.style.filter = "brightness(1)";
       }
       // if pageBody is light, remove light and sun classes and add dark and moon classes
       else if (pageBody.classList.contains("light")) {
+        navbar.classList.remove("bg-light");
+        navbar.classList.remove("navbar-light");
+
         pageBody.classList.remove("light");
         pageBody.classList.remove("sun");
         button.classList.remove("light");
         trucklightDefault.classList.remove("lightOff");
         trucklightOffDefault.classList.remove("lightOn");
 
+        navbar.classList.add("bg-black");
+        navbar.classList.add("navbar-dark");
         pageBody.classList.add("dark");
         pageBody.classList.add("moon");
         button.classList.add("dark");
         trucklightDefault.classList.add("lightOn");
         trucklightOffDefault.classList.add("lightOff");
+        //darken truckRoadImage
+        truckRoadImage.style.filter = "brightness(0.2)";
       }
     };
     toggleMultipleClasses(pageBody, darkModeButton);
@@ -80,6 +101,7 @@ function moveTruck() {
   $("#foodTruckContainer-1").animate(
     {
       left: "+=3500", //moves truck from left to right
+      bounce: 1000,
     },
     randomizeSpeed(), //animation speed
     function () {
