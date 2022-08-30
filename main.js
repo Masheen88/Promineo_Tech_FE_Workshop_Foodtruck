@@ -7,12 +7,15 @@ function giveMeDarkMode() {
 
   //enables dark mode by default.
   let bodyDefault = document.getElementsByTagName("body")[0]; //gets the body tag
-  let darkModeButtonDefault = document.getElementById("toggleDarkMode");
+  let darkModeButtonDefault = document.getElementById("toggleDarkMode"); //gets the toggleDarkMode button
   bodyDefault.classList.add("dark"); //adds the class "dark" to the body tag
-  let trucklightDefault = document.getElementById("foodtruckHeadlight");
+  let trucklightDefault = document.getElementById("foodtruckHeadlight"); //gets the truck light
   trucklightDefault.classList.add("lightOn"); //adds the class "lightOn" to the trucklight tag
-  let trucklightOffDefault = document.getElementById("foodtruckHeadlightOff");
+  let trucklightOffDefault = document.getElementById("foodtruckHeadlightOff"); //gets the truck light off
   trucklightOffDefault.classList.add("lightOff"); //adds the class "lightOff" to the trucklightOff tag
+  //hide foodTruckCoin
+  let foodTruckCoinDefault = document.getElementById("foodTruckCoin"); //gets the foodTruckCoin
+  foodTruckCoinDefault.style.display = "none"; //hides the foodTruckCoin
 
   //if dark mode add class moon to body
   if (bodyDefault.classList.contains("dark")) {
@@ -70,8 +73,8 @@ let foodTruckContainer1 = document.getElementById("foodTruckContainer-1");
 
 //start food truck offscreen to the left
 !$("#foodTruckContainer-1").css("left", "-1000px");
-
 !moveTruck();
+
 function moveTruck() {
   console.log("truck is 1 is moving");
   $("#foodTruckContainer-1").animate(
@@ -85,6 +88,27 @@ function moveTruck() {
     }
   );
 }
+
+// on click display foodTruckCoin and move up and down
+$("#foodTruckContainer-1").click(function () {
+  console.log("truck is 1 is clicked");
+  $("#foodTruckCoin").show();
+  //play sound
+  let audio = new Audio("./assets/coinsound.wav");
+  audio.play();
+  $("#foodTruckCoin").animate(
+    {
+      //move the coin up and then back down
+      top: "-=50",
+    },
+    1000, //animation speed
+    function () {
+      // Animation complete.
+      $("#foodTruckCoin").hide();
+      $("#foodTruckCoin").css("top", "35px");
+    }
+  );
+});
 
 // reset truck to off screen to the left and move it to the right
 function resetTruck() {
