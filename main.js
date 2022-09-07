@@ -1,6 +1,6 @@
 //* Dark/Light Mode - Begin
 //toggle dark mode with button id "toggleDarkMode"
-giveMeDarkMode();
+
 function giveMeDarkMode() {
   console.log("Dark Mode Go!");
   let toggleDarkMode = document.getElementById("toggleDarkMode");
@@ -88,85 +88,157 @@ function giveMeDarkMode() {
 
 //! Rest of Code Goes below here -------------------------------------------------
 
-//TODO: Animate image to move from the left to right of the screen
+//TODO: Pull in API data for food truck instances
+const foodTruckData = "http://localhost:3000/foodtrucks"; //food truck data from API
+let allFoodTrucksData = []; //array to hold all food truck data
 
-let foodTruckContainer1 = document.getElementById("foodTruckContainer-1");
-
-//start food truck offscreen to the left
-!$("#foodTruckContainer-1").css("left", "-1000px");
-!moveTruck();
-
-function moveTruck() {
-  console.log("truck is 1 is moving");
-  $("#foodTruckContainer-1").animate(
-    {
-      left: "+=3500", //moves truck from left to right
-      bounce: 1000,
-    },
-    randomizeSpeed(), //animation speed
-    function () {
-      // Animation complete.
-      resetTruck();
-    }
-  );
-}
-
-// on click display foodTruckCoin and move up and down
-$("#foodTruckContainer-1").click(function () {
-  console.log("truck is 1 is clicked");
-  $("#foodTruckCoin").show();
-  //play sound
-  let audio = new Audio("./assets/coinsound.wav");
-  audio.play();
-  $("#foodTruckCoin").animate(
-    {
-      //move the coin up and then back down
-      top: "-=50",
-    },
-    1000, //animation speed
-    function () {
-      // Animation complete.
-      $("#foodTruckCoin").hide();
-      $("#foodTruckCoin").css("top", "35px");
-    }
-  );
+//wait for ajax to return data before moving to next function
+let getFoodDataFromAPI = $.getJSON(foodTruckData, function (data) {
+  allFoodTrucksData = data;
+  // console.log(allFoodTrucksData);
 });
 
-// reset truck to off screen to the left and move it to the right
-function resetTruck() {
-  console.log("truck is 1 is resetting");
-  $("#foodTruckContainer-1").animate(
-    {
-      left: "-=3500", //moves truck from right to left (resets it to offscreen)
-    },
-    0, //animation speed
-    function () {
-      // Animation complete.
-      //when truck is reset, move it to the right
-      moveTruck();
-    }
-  );
-}
-
-//randomizeS the speed of the truck
-function randomizeSpeed() {
-  let randomNumber = Math.floor(Math.random() * 100) + 1;
-  //2% chance to deliver food SUPER FAST!
-  if (randomNumber <= 2) {
-    return Math.floor(Math.random() * (3000 - 1000 + 1)) + 1000;
+/*
+GET data request is wrapped in a promise so that it will 
+wait for the data to return before moving to the next function
+*/
+getFoodDataFromAPI.then(function () {
+  if (allFoodTrucksData.length === 0) {
+    console.log("test");
+    setTimeout(getFoodDataFromAPI, 1000);
+    //wait for
   } else {
-    // return a random number between 15 and 30 seconds
-    return Math.floor(Math.random() * (3000 - 1500 + 1)) + 30000;
+    //for loop to create food truck instances
+    for (let i = 0; i < allFoodTrucksData.length; i++) {
+      console.log("allFoodTrucksData[i]", allFoodTrucksData[i]);
+      //append food truck instances to the foodTruckContainer
+      $("#truckRoad").append(
+        `
+         <div class="foodTruckContainer" id="foodTruckContainer-${i}">
+        <div id="foodtruck-${i}">
+        <img
+        class="foodTruckImage"
+        src="${allFoodTrucksData[i].foodTruckTypeImage}"
+        alt="Snow"
+        style="width: 25%"
+      />
+      <div class="bottom-left">Bottom Left</div>
+      <div class="top-left">Top Left</div>
+      <div class="top-right">Top Right</div>
+      <div class="bottom-right">Bottom Right</div>
+      <div class="centered">${allFoodTrucksData[i].name}!</div>
+      <img
+        id="foodTruckCoin"
+        src="./images/coinnobg.gif"
+        style="width: 10%; top: 35px; left: 125px"
+      />
+      <img
+        id="foodtruckHeadlight"
+        src="./images/foodtruck-headlights.png"
+        style="width: 25%"
+      />
+      <img
+        id="foodtruckHeadlightOff"
+        src="./images/foodtruck-headlightsOFF.png"
+        style="width: 25%; pointer-events: none"
+      />
+    </div>
+        </div>
+        </div>
+        `
+      );
+      startFoodTruck(i);
+    }
+    giveMeDarkMode();
+    console.log("after for loop");
+
+    //TODO: Animate image to move from the left to right of the screen
+
+    let foodTruckContainer = document.getElementById("foodTruckContainer-1");
+
+    //start food truck offscreen to the left
+    function startFoodTruck(startEngine) {
+      // on click display foodTruckCoin and move up and down
+      $(`#foodTruckContainer-${startEngine}`).click(function () {
+        console.log("truck is 1 is clicked");
+        $("#foodTruckCoin").show();
+        //play sound
+        let audio = new Audio("./assets/coinsound.wav");
+        audio.play();
+        $("#foodTruckCoin").animate(
+          {
+            //move the coin up and then back down
+            top: "-=50",
+          },
+          1000, //animation speed
+          function () {
+            // Animation complete.
+            $("#foodTruckCoin").hide();
+            $("#foodTruckCoin").css("top", "35px");
+          }
+        );
+      });
+
+      $(`#foodTruckContainer-${startEngine}`).css("left", "-1000px");
+      moveTruck(startEngine);
+    }
+
+    function moveTruck(truckId) {
+      console.log("truck is 1 is moving");
+
+      $(`#foodTruckContainer-${truckId}`).animate(
+        {
+          left: "+=3500", //moves truck from left to right
+          bounce: 1000,
+          // clip image if past 1920px
+          clip: "rect(0px, 1920px, 1080px, 0px)",
+        },
+        randomizeSpeed(), //animation speed
+        function () {
+          // Animation complete.
+
+          resetTruck(truckId);
+        }
+      );
+    }
+
+    // reset truck to off screen to the left and move it to the right
+    function resetTruck(truckId) {
+      console.log(`truck #${truckId} is resetting`);
+      $(`#foodTruckContainer-${truckId}`).animate(
+        {
+          left: "-=3500", //moves truck from right to left (resets it to offscreen)
+        },
+        0, //animation speed
+        function () {
+          // Animation complete.
+          //when truck is reset, move it to the right
+          moveTruck(truckId);
+        }
+      );
+    }
+
+    //randomizeS the speed of the truck
+    function randomizeSpeed() {
+      let randomNumber = Math.floor(Math.random() * 1000) + 1;
+      //2% chance to deliver food SUPER FAST!
+      if (randomNumber <= 2) {
+        return Math.floor(Math.random() * (3000 - 1000 + 1)) + 1000;
+      } else {
+        // return a random number between 15 and 30 seconds
+        return Math.floor(Math.random() * (3000 - 1500 + 1)) + 15000;
+      }
+    }
+
+    //TODO: Need function to build recipe using ingredients and add it to a list (API)
+
+    //TODO: Allow user to select from list of recipes and order them
+
+    //TODO: If recipe is out of stock, prevent selection and alert user
+
+    //TODO: Allow user to create their own food truck instance and add it a list (API)
+    //*Can have 3 recipes for each food truck
+
+    //TODO: Display instances of each food truck on the page randomly
   }
-}
-
-//TODO: Need function to build recipe using ingredients and add it to a list (API)
-
-//TODO: Allow user to select from list of recipes and order them
-
-//TODO: If recipe is out of stock, prevent selection and alert user
-
-//TODO: Allow user to create their own food truck instance and add it a list (API)
-//*Can have 3 recipes for each food truck
-
-//TODO: Display instances of each food truck on the page randomly
+});

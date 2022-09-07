@@ -1,9 +1,22 @@
 {
-  "posts": [
+  "foodtrucks": [
     {
       "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+      "name": "Matt's Truck",
+      "foodTruckType": "Nachos",
+      "foodTruckTypeImage": "./images/foodtruck-4.png"
+    },
+    {
+      "id": 2,
+      "name": "Kristina's Truck",
+      "foodTruckType": "Tacos",
+      "foodTruckTypeImage": "./images/foodtruck-4.png"
+    },
+    {
+      "id": 3,
+      "name": "Stephanie's Truck",
+      "foodTruckType": "Chinese",
+      "foodTruckTypeImage": "./images/foodtruck-4.png"
     }
   ],
   "comments": [

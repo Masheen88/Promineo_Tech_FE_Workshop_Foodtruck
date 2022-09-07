@@ -42,7 +42,6 @@ body.light {
 body {
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
 }
 
 #truckRoad {
@@ -52,7 +51,7 @@ body {
 }
 
 #truckRoadImage {
-  width: 1920px;
+  width: 100vw;
   height: 1080px;
   left: 0px;
   top: 125px;

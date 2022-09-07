@@ -4,14 +4,14 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "start": "concurrently \"json-server --host 192.168.50.56 db.json\" \"live-server --port=8090 \""
+    "start": "concurrently \"json-server --host localhost db.json\" \"live-server --port=8090 \""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bootstrap": "^5.2.0",
-    "concurrently": "^7.3.0",
+    "concurrently": "^7.4.0",
     "jquery": "^3.6.1"
   }
 }
