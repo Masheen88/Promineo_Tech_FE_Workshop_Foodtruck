@@ -2,19 +2,19 @@
   "foodtrucks": [
     {
       "id": 1,
-      "name": "Matt's Truck",
+      "name": "Matthew",
       "foodTruckType": "Nachos",
       "foodTruckTypeImage": "./images/foodtruck-4.png"
     },
     {
       "id": 2,
-      "name": "Kristina's Truck",
+      "name": "Kristina",
       "foodTruckType": "Tacos",
       "foodTruckTypeImage": "./images/foodtruck-4.png"
     },
     {
       "id": 3,
-      "name": "Stephanie's Truck",
+      "name": "Stephanie",
       "foodTruckType": "Chinese",
       "foodTruckTypeImage": "./images/foodtruck-4.png"
     }

@@ -1,7 +1,7 @@
 //* Dark/Light Mode - Begin
 //toggle dark mode with button id "toggleDarkMode"
 
-function giveMeDarkMode() {
+function giveMeDarkMode(i) {
   console.log("Dark Mode Go!");
   let toggleDarkMode = document.getElementById("toggleDarkMode");
 
@@ -9,12 +9,14 @@ function giveMeDarkMode() {
   let bodyDefault = document.getElementsByTagName("body")[0]; //gets the body tag
   let darkModeButtonDefault = document.getElementById("toggleDarkMode"); //gets the toggleDarkMode button
   bodyDefault.classList.add("dark"); //adds the class "dark" to the body tag
-  let trucklightDefault = document.getElementById("foodtruckHeadlight"); //gets the truck light
+  let trucklightDefault = document.getElementById(`foodtruckHeadlight-${i}`); //gets the truck light
   trucklightDefault.classList.add("lightOn"); //adds the class "lightOn" to the trucklight tag
-  let trucklightOffDefault = document.getElementById("foodtruckHeadlightOff"); //gets the truck light off
+  let trucklightOffDefault = document.getElementById(
+    `foodtruckHeadlightOff-${i}`
+  ); //gets the truck light off
   trucklightOffDefault.classList.add("lightOff"); //adds the class "lightOff" to the trucklightOff tag
   //hide foodTruckCoin
-  let foodTruckCoinDefault = document.getElementById("foodTruckCoin"); //gets the foodTruckCoin
+  let foodTruckCoinDefault = document.getElementById(`foodTruckCoin-${i}`); //gets the foodTruckCoin
   foodTruckCoinDefault.style.display = "none"; //hides the foodTruckCoin
   let truckRoadImage = document.getElementById("truckRoadImage"); //gets the truckRoadImage
   //darken truckRoadImage
@@ -110,10 +112,15 @@ getFoodDataFromAPI.then(function () {
   } else {
     //for loop to create food truck instances
     for (let i = 0; i < allFoodTrucksData.length; i++) {
-      console.log("allFoodTrucksData[i]", allFoodTrucksData[i]);
+      console.log(
+        "loop iteration:",
+        i,
+        `allFoodTrucksData:`,
+        allFoodTrucksData[i]
+      );
       //append food truck instances to the foodTruckContainer
       $("#truckRoad").append(
-        `
+        String.raw`
          <div class="foodTruckContainer" id="foodTruckContainer-${i}">
         <div id="foodtruck-${i}">
         <img
@@ -126,19 +133,19 @@ getFoodDataFromAPI.then(function () {
       <div class="top-left">Top Left</div>
       <div class="top-right">Top Right</div>
       <div class="bottom-right">Bottom Right</div>
-      <div class="centered">${allFoodTrucksData[i].name}!</div>
+      <div class="centered">${allFoodTrucksData[i].name}</div>
       <img
-        id="foodTruckCoin"
+        id="foodTruckCoin-${i}"
         src="./images/coinnobg.gif"
         style="width: 10%; top: 35px; left: 125px"
       />
       <img
-        id="foodtruckHeadlight"
+        id="foodtruckHeadlight-${i}"
         src="./images/foodtruck-headlights.png"
         style="width: 25%"
       />
       <img
-        id="foodtruckHeadlightOff"
+        id="foodtruckHeadlightOff-${i}"
         src="./images/foodtruck-headlightsOFF.png"
         style="width: 25%; pointer-events: none"
       />
@@ -148,8 +155,9 @@ getFoodDataFromAPI.then(function () {
         `
       );
       startFoodTruck(i);
+      giveMeDarkMode(i);
     }
-    giveMeDarkMode();
+
     console.log("after for loop");
 
     //TODO: Animate image to move from the left to right of the screen
@@ -188,10 +196,8 @@ getFoodDataFromAPI.then(function () {
 
       $(`#foodTruckContainer-${truckId}`).animate(
         {
-          left: "+=3500", //moves truck from left to right
+          left: "+=3000", //moves truck from left to right
           bounce: 1000,
-          // clip image if past 1920px
-          clip: "rect(0px, 1920px, 1080px, 0px)",
         },
         randomizeSpeed(), //animation speed
         function () {
@@ -207,7 +213,7 @@ getFoodDataFromAPI.then(function () {
       console.log(`truck #${truckId} is resetting`);
       $(`#foodTruckContainer-${truckId}`).animate(
         {
-          left: "-=3500", //moves truck from right to left (resets it to offscreen)
+          left: "-=3000", //moves truck from right to left (resets it to offscreen)
         },
         0, //animation speed
         function () {
