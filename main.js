@@ -9,12 +9,12 @@ function giveMeDarkMode(i) {
   let bodyDefault = document.getElementsByTagName("body")[0]; //gets the body tag
   let darkModeButtonDefault = document.getElementById("toggleDarkMode"); //gets the toggleDarkMode button
   bodyDefault.classList.add("dark"); //adds the class "dark" to the body tag
+
   let trucklightDefault = document.getElementById(`foodtruckHeadlight-${i}`); //gets the truck light
-  trucklightDefault.classList.add("lightOn"); //adds the class "lightOn" to the trucklight tag
   let trucklightOffDefault = document.getElementById(
-    `foodtruckHeadlightOff-${i}`
-  ); //gets the truck light off
-  trucklightOffDefault.classList.add("lightOff"); //adds the class "lightOff" to the trucklightOff tag
+    `foodtruckHeadlightOff-${i}` //gets the truck light off
+  );
+
   //hide foodTruckCoin
   let foodTruckCoinDefault = document.getElementById(`foodTruckCoin-${i}`); //gets the foodTruckCoin
   foodTruckCoinDefault.style.display = "none"; //hides the foodTruckCoin
@@ -31,31 +31,34 @@ function giveMeDarkMode(i) {
   //toggle dark mode with button id "toggleDarkMode"
   toggleDarkMode.addEventListener("click", function () {
     let pageBody = document.getElementsByTagName("body")[0]; //gets the body element
-    let darkModeButton = document.getElementById("toggleDarkMode");
-
-    // console.log(darkModeButton);
 
     // toggle multiple classes on body
     let toggleMultipleClasses = function (button) {
       let navbar = document.getElementById("navbar");
+
       // if body is dark, remove dark and moon classes and add light and sun classes
       if (pageBody.classList.contains("dark")) {
         navbar.classList.remove("bg-black");
-        navbar.classList.remove("navbar-dark");
-
-        pageBody.classList.remove("dark");
-        pageBody.classList.remove("moon");
-        button.classList.remove("dark");
         navbar.classList.remove("bg-dark");
-        trucklightDefault.classList.remove("lightOn");
-        trucklightOffDefault.classList.remove("lightOff");
-        //set navbar to bg-light
+        navbar.classList.remove("navbar-dark");
 
         navbar.classList.add("bg-light");
         navbar.classList.add("navbar-light");
+
+        pageBody.classList.remove("dark");
+        pageBody.classList.remove("moon");
+
         pageBody.classList.add("light");
         pageBody.classList.add("sun");
+
+        button.classList.remove("dark");
         button.classList.add("light");
+
+        //set navbar to bg-light
+
+        trucklightDefault.classList.remove("lightOn");
+        trucklightOffDefault.classList.remove("lightOff");
+
         trucklightDefault.classList.add("lightOff");
         trucklightOffDefault.classList.add("lightOn");
         //bright truckRoadImage
@@ -66,24 +69,28 @@ function giveMeDarkMode(i) {
         navbar.classList.remove("bg-light");
         navbar.classList.remove("navbar-light");
 
+        navbar.classList.add("bg-black");
+        navbar.classList.add("navbar-dark");
+
         pageBody.classList.remove("light");
         pageBody.classList.remove("sun");
+
+        pageBody.classList.add("dark");
+        pageBody.classList.add("moon");
+
         button.classList.remove("light");
+        button.classList.add("dark");
+
         trucklightDefault.classList.remove("lightOff");
         trucklightOffDefault.classList.remove("lightOn");
 
-        navbar.classList.add("bg-black");
-        navbar.classList.add("navbar-dark");
-        pageBody.classList.add("dark");
-        pageBody.classList.add("moon");
-        button.classList.add("dark");
         trucklightDefault.classList.add("lightOn");
         trucklightOffDefault.classList.add("lightOff");
         //darken truckRoadImage
         truckRoadImage.style.filter = "brightness(0.2)";
       }
     };
-    toggleMultipleClasses(pageBody, darkModeButton);
+    toggleMultipleClasses(pageBody);
   });
 }
 //* Dark/Light Mode - End
@@ -143,11 +150,13 @@ getFoodDataFromAPI.then(function () {
         id="foodtruckHeadlight-${i}"
         src="./images/foodtruck-headlights.png"
         style="width: 25%"
+        class="lightOn"
       />
       <img
         id="foodtruckHeadlightOff-${i}"
         src="./images/foodtruck-headlightsOFF.png"
         style="width: 25%; pointer-events: none"
+        class="lightOff"
       />
     </div>
         </div>
