@@ -1,4 +1,5 @@
 //* Dark/Light Mode - Begin
+const html = String.raw;
 //toggle dark mode with button id "toggleDarkMode"
 
 function giveMeDarkMode(i) {
@@ -127,7 +128,7 @@ getFoodDataFromAPI.then(function () {
       );
       //append food truck instances to the foodTruckContainer
       $("#truckRoad").append(
-        String.raw`
+        html`
          <div class="foodTruckContainer" id="foodTruckContainer-${i}">
         <div id="foodtruck-${i}">
         <img
