@@ -164,7 +164,11 @@ getFoodDataFromAPI.then(function () {
         </div>
         `
       );
+      // Starts the foodTruck
       startFoodTruck(i);
+      // moveFoodTruck(i);
+
+      //Sets everything to default dark mode.
       giveMeDarkMode(i);
     }
 
@@ -178,12 +182,21 @@ getFoodDataFromAPI.then(function () {
     function startFoodTruck(startEngine) {
       // on click display foodTruckCoin and move up and down
       $(`#foodTruckContainer-${startEngine}`).click(function () {
-        console.log("truck is 1 is clicked");
-        $("#foodTruckCoin").show();
+        console.log(
+          "truck is 1 is clicked",
+          $(`#foodTruckCoin-${startEngine}`)
+        );
+        let foodTruckCoin = $(`#foodTruckCoin-${startEngine}`);
+
+        //append jquery css to foodTruckCoin
+        foodTruckCoin.addClass("foodTruckCoinDoStuff").show();
+
+        // $(`#foodTruckCoin-${startEngine}`).show();
+
         //play sound
         let audio = new Audio("./assets/coinsound.wav");
         audio.play();
-        $("#foodTruckCoin").animate(
+        foodTruckCoin.animate(
           {
             //move the coin up and then back down
             top: "-=50",
@@ -191,17 +204,15 @@ getFoodDataFromAPI.then(function () {
           1000, //animation speed
           function () {
             // Animation complete.
-            $("#foodTruckCoin").hide();
-            $("#foodTruckCoin").css("top", "35px");
+            foodTruckCoin.removeClass("foodTruckCoinDoStuff").show().hide();
+            foodTruckCoin.css("top", "35px");
           }
         );
       });
-
-      $(`#foodTruckContainer-${startEngine}`).css("left", "-1000px");
-      moveTruck(startEngine);
     }
 
     function moveTruck(truckId) {
+      $(`#foodTruckContainer-${startEngine}`).css("left", "-1000px");
       console.log("truck is 1 is moving");
 
       $(`#foodTruckContainer-${truckId}`).animate(

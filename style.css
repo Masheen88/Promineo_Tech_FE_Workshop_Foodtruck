@@ -156,3 +156,10 @@ body {
   left: 100px;
   z-index: +1;
 }
+
+.foodTruckCoinDoStuff {
+  position: absolute;
+  top: -50px;
+  left: 100px;
+  z-index: +1;
+}

@@ -10,13 +10,14 @@
       "id": 2,
       "name": "Kristina",
       "foodTruckType": "Tacos",
-      "foodTruckTypeImage": "./images/foodtruck-4.png"
+      "foodTruckTypeImage": "./images/foodtruck-5.png"
     },
     {
       "id": 3,
       "name": "Stephanie",
       "foodTruckType": "Chinese",
-      "foodTruckTypeImage": "./images/foodtruck-4.png"
+      "foodTruckTypeImage": "./images/foodtruck-6.png",
+      "recipes": []
     }
   ],
   "comments": [
