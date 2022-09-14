@@ -165,7 +165,7 @@ getFoodDataFromAPI.then(function () {
         `
       );
       // Starts the foodTruck
-      startFoodTruck(i);
+      startFoodTruckCoins(i);
       // moveFoodTruck(i);
 
       //Sets everything to default dark mode.
@@ -178,20 +178,16 @@ getFoodDataFromAPI.then(function () {
 
     let foodTruckContainer = document.getElementById("foodTruckContainer-1");
 
-    //start food truck offscreen to the left
-    function startFoodTruck(startEngine) {
+    function startFoodTruckCoins(coinsId) {
       // on click display foodTruckCoin and move up and down
-      $(`#foodTruckContainer-${startEngine}`).click(function () {
-        console.log(
-          "truck is 1 is clicked",
-          $(`#foodTruckCoin-${startEngine}`)
-        );
-        let foodTruckCoin = $(`#foodTruckCoin-${startEngine}`);
+      $(`#foodTruckContainer-${coinsId}`).click(function () {
+        console.log("truck is 1 is clicked", $(`#foodTruckCoin-${coinsId}`));
+        let foodTruckCoin = $(`#foodTruckCoin-${coinsId}`);
 
         //append jquery css to foodTruckCoin
         foodTruckCoin.addClass("foodTruckCoinDoStuff").show();
 
-        // $(`#foodTruckCoin-${startEngine}`).show();
+        // $(`#foodTruckCoin-${coinsId}`).show();
 
         //play sound
         let audio = new Audio("./assets/coinsound.wav");
@@ -211,8 +207,9 @@ getFoodDataFromAPI.then(function () {
       });
     }
 
-    function moveTruck(truckId) {
-      $(`#foodTruckContainer-${startEngine}`).css("left", "-1000px");
+    //TODO: Animate image to move from the left to right of the screen
+    function moveFoodTruck(truckId) {
+      $(`#foodTruckContainer-${truckId}`).css("left", "-1000px");
       console.log("truck is 1 is moving");
 
       $(`#foodTruckContainer-${truckId}`).animate(
