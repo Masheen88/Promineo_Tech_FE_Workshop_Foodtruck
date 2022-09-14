@@ -18,8 +18,6 @@ function giveMeDarkMode(i) {
     `.foodTruckHeadlightOff`
   ); //gets the truck light off
 
-  let truckOrderingMenu = document.getElementById("truckOrderingMenu");
-
   //hide foodTruckCoin
   let foodTruckCoinDefault = document.getElementById(`foodTruckCoin-${i}`); //gets the foodTruckCoin
   foodTruckCoinDefault.style.display = "none"; //hides the foodTruckCoin
@@ -134,43 +132,49 @@ getFoodDataFromAPI.then(function () {
         `allFoodTrucksData:`,
         allFoodTrucksData[i]
       );
+
+      //append food truck instance to foodTruckLane 1, 2, or 3 at random
+      let foodTruckLane = Math.floor(Math.random() * 3) + 1; //random number between 1 and 3
+
       //append food truck instances to the foodTruckContainer
-      $("#truckRoad").append(
+      $(`#truckLane${foodTruckLane}`).append(
         html`
-          <div class="foodTruckContainer" id="foodTruckContainer-${i}">
-            <div id="foodtruck-${i}">
-              <img
-                class="foodTruckImage"
-                src="${allFoodTrucksData[i].foodTruckTypeImage}"
-                alt="food truck image"
-                style="width: 25%"
-              />
-              <div class="bottom-left">Bottom Left</div>
-              <div class="top-left">Top Left</div>
-              <div class="top-right">Top Right</div>
-              <div class="bottom-right">Bottom Right</div>
-              <div class="centered">${allFoodTrucksData[i].name}</div>
-              <img
-                id="foodTruckCoin-${i}"
-                src="./images/coinnobg.gif"
-                style="width: 10%; top: 35px; left: 125px"
-              />
-              <img
-                class="foodTruckHeadlightOff"
-                id="foodtruckHeadlightOff-${i}"
-                src="./images/foodtruck-headlightsOFF.png"
-                style="width: 25%;opacity: 0; display: none;"
-                class="lightOff"
-              />
-              <img
-                class="foodTruckHeadlightOn"
-                id="foodtruckHeadlight-${i}"
-                src="./images/foodtruck-headlights.png"
-                style="width: 25%"
-                class="lightOn"
-              />
+          <span>
+            <div class="foodTruckContainer" id="foodTruckContainer-${i}">
+              <div id="foodtruck-${i}">
+                <img
+                  class="foodTruckImage"
+                  src="${allFoodTrucksData[i].foodTruckTypeImage}"
+                  alt="food truck image"
+                  style="width: 25%"
+                />
+                <div class="bottom-left">Bottom Left</div>
+                <div class="top-left">Top Left</div>
+                <div class="top-right">Top Right</div>
+                <div class="bottom-right">Bottom Right</div>
+                <div class="centered">${allFoodTrucksData[i].name}</div>
+                <img
+                  id="foodTruckCoin-${i}"
+                  src="./images/coinnobg.gif"
+                  style="width: 10%; top: 35px; left: 125px"
+                />
+                <img
+                  class="foodTruckHeadlightOff"
+                  id="foodtruckHeadlightOff-${i}"
+                  src="./images/foodtruck-headlightsOFF.png"
+                  style="width: 25%;opacity: 0; display: none;"
+                  class="lightOff"
+                />
+                <img
+                  class="foodTruckHeadlightOn"
+                  id="foodtruckHeadlight-${i}"
+                  src="./images/foodtruck-headlights.png"
+                  style="width: 25%"
+                  class="lightOn"
+                />
+              </div>
             </div>
-          </div>
+          </span>
         `
       );
 
