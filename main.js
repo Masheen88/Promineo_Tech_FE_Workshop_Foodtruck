@@ -5,23 +5,17 @@
 // play bgMusicSrc on page load
 function playMusic() {
   let bgMusicSrc = "./assets/8-Bit-Highway-Theme-Retro.mp3";
-  let audio = document.createElement("audio");
-  // append audio top of body
-  document.body.prepend(audio);
-  //
-  audio.autoplay = true;
-  //
-  audio.volume = 0.05;
-  audio.load();
-
-  audio.addEventListener(
-    "load",
-    function () {
-      audio.play();
-    },
-    true
-  );
-  audio.src = bgMusicSrc;
+  let toggleMusic = document.getElementById("toggleMusic");
+  // play bgMusicSrc audio on click of toggleMusic id, pause music on second click
+  toggleMusic.addEventListener("click", function () {
+    let bgMusic = document.getElementById("bgMusic");
+    if (bgMusic.paused) {
+      bgMusic.volume = 0.05;
+      bgMusic.play();
+    } else {
+      bgMusic.pause();
+    }
+  });
 }
 playMusic();
 

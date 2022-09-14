@@ -17,6 +17,18 @@
       integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css"
+      integrity="sha512-5PV92qsds/16vyYIJo3T/As4m2d8b6oWYfoqV+vtizRB6KhF1F9kYzWzQmsO6T3z3QG2Xdhrx7FQ+5R1LiQdUA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <audio
+      id="bgMusic"
+      src="./assets/8-Bit-Highway-Theme-Retro.mp3"
+      loop
+    ></audio>
   </head>
   <body>
     <!-- auto players the audio -->
@@ -44,12 +56,16 @@
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon"><img src="./favicon.ico" /></span>
+          <span class="navbar-toggler-icon"><img src="favicon.ico" /></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <!-- button to toggle between light/dark mode -->
             <button class="darkButton" id="toggleDarkMode">Dark/Light</button>
+            <!-- button to play music -->
+            <button class="musicButton" id="toggleMusic">
+              <i class="bi bi-music-note-list"></i>
+            </button>
             <li class="nav-item active">
               <a class="nav-link" href="#">Create A Truck</a>
             </li>
