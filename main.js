@@ -101,7 +101,13 @@ function giveMeDarkMode(i) {
 //! Rest of Code Goes below here -------------------------------------------------
 
 //TODO: Pull in API data for food truck instances
-const foodTruckData = "http://localhost:3000/foodtrucks"; //food truck data from API
+//api using JSON-server
+// const foodTruckData = "http://localhost:3000/foodtrucks"; //food truck data from API
+
+//api using mockAPI
+const foodTruckData =
+  "https://62c85d578c90491c2cb47da3.mockapi.io/Promineo_Tech_API/foodtrucks";
+
 let allFoodTrucksData = []; //array to hold all food truck data
 
 //wait for ajax to return data before moving to next function
@@ -153,7 +159,7 @@ getFoodDataFromAPI.then(function () {
                 class="foodTruckHeadlightOff"
                 id="foodtruckHeadlightOff-${i}"
                 src="./images/foodtruck-headlightsOFF.png"
-                style="width: 25%; display: none;"
+                style="width: 25%;opacity: 0; display: none;"
                 class="lightOff"
               />
               <img
@@ -192,6 +198,8 @@ getFoodDataFromAPI.then(function () {
 
         //play sound
         let audio = new Audio("./assets/coinsound.wav");
+
+        audio.volume = 0.1;
         audio.play();
         foodTruckCoin.animate(
           {
