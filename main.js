@@ -11,17 +11,14 @@ function giveMeDarkMode(i) {
   let darkModeButtonDefault = document.getElementById("toggleDarkMode"); //gets the toggleDarkMode button
   bodyDefault.classList.add("dark"); //adds the class "dark" to the body tag
 
-  let trucklightOnDefault = document.getElementById(`foodtruckHeadlight-${i}`); //gets the truck light
-  let trucklightOffDefault = document.getElementById(
-    `foodtruckHeadlightOff-${i}` //gets the truck light off
-  );
-
   let foodTruckLightOnDefaultClass = document.querySelectorAll(
     `.foodTruckHeadlightOn`
   ); //gets the truck light
   let foodTruckLightOffDefaultClass = document.querySelectorAll(
     `.foodTruckHeadlightOff`
   ); //gets the truck light off
+
+  let truckOrderingMenu = document.getElementById("truckOrderingMenu");
 
   //hide foodTruckCoin
   let foodTruckCoinDefault = document.getElementById(`foodTruckCoin-${i}`); //gets the foodTruckCoin
@@ -206,6 +203,7 @@ getFoodDataFromAPI.then(function () {
             // Animation complete.
             foodTruckCoin.removeClass("foodTruckCoinDoStuff").show().hide();
             foodTruckCoin.css("top", "35px");
+            orderFood(coinsId);
           }
         );
       });
@@ -241,7 +239,7 @@ getFoodDataFromAPI.then(function () {
         function () {
           // Animation complete.
           //when truck is reset, move it to the right
-          moveTruck(truckId);
+          moveFoodTruck(truckId);
         }
       );
     }
@@ -261,6 +259,54 @@ getFoodDataFromAPI.then(function () {
     //TODO: Need function to build recipe using ingredients and add it to a list (API)
 
     //TODO: Allow user to select from list of recipes and order them
+    function orderFood(truckId) {
+      console.log("Ordering Food");
+      //displays a popup form with the food truck's menu inside truckOrderingMenu
+      $(`#truckOrderingMenu`).html(
+        html`
+          <div class="truckOrderingMenu">
+            <div class="truckOrderingMenuHeader">
+              <h2>${allFoodTrucksData[truckId].name}</h2>
+              <h3>Menu</h3>
+              <!-- button to close the menu -->
+              <button id="closeMenuButton">X</button>
+            </div>
+            <div class="truckOrderingMenuBody">
+              <div class="truckOrderingMenuBodyLeft">
+                <div class="truckOrderingMenuBodyLeftTop">
+                  <h4>Food</h4>
+                  <div class="truckOrderingMenuBodyLeftTopFood">
+                    <div class="truckOrderingMenuBodyLeftTopFoodItem">
+                      <h5>Item 1</h5>
+                      <p>Price: $1.00</p>
+                      <p>Calories: 100</p>
+                      <p>Ingredients: 1, 2, 3</p>
+                    </div>
+                    <div class="truckOrderingMenuBodyLeftTopFoodItem">
+                      <h5>Item 2</h5>
+                      <p>Price: $1.00</p>
+                      <p>Calories: 100</p>
+                      <p>Ingredients: 1, 2, 3</p>
+                    </div>
+                    <div class="truckOrderingMenuBodyLeftTopFoodItem">
+                      <h5>Item 3</h5>
+                      <p>Price: $1.00</p>
+                      <p>Calories: 100</p>
+                      <p>Ingredients: 1, 2, 3</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `
+      );
+
+      // close menu button
+      $(`#closeMenuButton`).click(function () {
+        $(`#truckOrderingMenu`).html("");
+      });
+    }
 
     //TODO: If recipe is out of stock, prevent selection and alert user
 
