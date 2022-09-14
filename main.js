@@ -173,12 +173,13 @@ getFoodDataFromAPI.then(function () {
           </div>
         `
       );
-      // Starts the foodTruck
-      startFoodTruckCoins(i);
-      moveFoodTruck(i);
 
       //Sets everything to default dark mode.
       giveMeDarkMode(i);
+      // Starts the foodTruck
+      startFoodTruckCoins(i);
+      // delay the moveFoodTruck function by a random time
+      moveFoodTruck(i);
     }
 
     console.log("after for loop");
@@ -222,18 +223,28 @@ getFoodDataFromAPI.then(function () {
       $(`#foodTruckContainer-${truckId}`).css("left", "-1000px");
       console.log("truck is 1 is moving");
 
-      $(`#foodTruckContainer-${truckId}`).animate(
-        {
-          left: "+=3000", //moves truck from left to right
-          bounce: 1000,
-        },
-        randomizeSpeed(), //animation speed
-        function () {
-          // Animation complete.
+      function delay() {
+        //return random number between 1 and 5 seconds
+        return Math.floor(Math.random() * 5000) + 1000;
+      }
 
-          resetTruck(truckId);
-        }
-      );
+      //puts a delay between each truck at random
+      setTimeout(function () {
+        console.log("Why won't this truck start?!?!");
+
+        $(`#foodTruckContainer-${truckId}`).animate(
+          {
+            left: "+=3000", //moves truck from left to right
+            bounce: 1000,
+          },
+          randomizeSpeed(), //animation speed
+          function () {
+            // Animation complete.
+
+            resetTruck(truckId);
+          }
+        );
+      }, delay());
     }
 
     // reset truck to off screen to the left and move it to the right
