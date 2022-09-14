@@ -1,5 +1,29 @@
 //Some cool music
 //music by: https://www.youtube.com/watch?v=H9J61Cr2VPI
+// play audio on page load
+
+// play bgMusicSrc on page load
+function playMusic() {
+  let bgMusicSrc = "./assets/8-Bit-Highway-Theme-Retro.mp3";
+  let audio = document.createElement("audio");
+  // append audio top of body
+  document.body.prepend(audio);
+  //
+  audio.autoplay = true;
+  //
+  audio.volume = 0.05;
+  audio.load();
+
+  audio.addEventListener(
+    "load",
+    function () {
+      audio.play();
+    },
+    true
+  );
+  audio.src = bgMusicSrc;
+}
+playMusic();
 
 //* Dark/Light Mode - Begin
 const html = String.raw;
@@ -207,7 +231,7 @@ getFoodDataFromAPI.then(function () {
         //play sound
         let audio = new Audio("./assets/coinsound.wav");
 
-        audio.volume = 0.1;
+        audio.volume = 0.08;
         audio.play();
         foodTruckCoin.animate(
           {
