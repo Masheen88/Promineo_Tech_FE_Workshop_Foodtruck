@@ -1,3 +1,13 @@
+//Some cool music
+//music by: https://www.youtube.com/watch?v=H9J61Cr2VPI
+//play mp3 audio
+function playAudio() {
+  var audio = new Audio("./assets/8-Bit-Highway-Theme-Retro.mp3");
+  audio.volume = 0.1;
+  audio.play();
+}
+playAudio();
+
 //* Dark/Light Mode - Begin
 const html = String.raw;
 //toggle dark mode with button id "toggleDarkMode"
