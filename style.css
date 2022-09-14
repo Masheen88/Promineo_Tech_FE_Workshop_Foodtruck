@@ -25,6 +25,13 @@ body.light {
 }
 /* Dark/Light Mode - End */
 
+/* navbar should expand on top of page */
+.navbar {
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
 /* Project Code Below Here */
 
 .navbar .navbar-nav {
@@ -44,6 +51,8 @@ body {
   height: 100vh;
 }
 
+/* bring truck road to the foreground */
+
 #truckRoad {
   padding-top: 25px;
   width: 100vw;
@@ -55,7 +64,7 @@ body {
   height: 1080px;
   left: 0px;
   top: 125px;
-  z-index: -1;
+  z-index: 0;
   position: absolute;
 }
 
