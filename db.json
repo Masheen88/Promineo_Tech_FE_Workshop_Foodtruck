@@ -4,13 +4,15 @@
       "id": 1,
       "name": "Matthew",
       "foodTruckType": "Nachos",
-      "foodTruckTypeImage": "./images/foodtruck-4.png"
+      "foodTruckTypeImage": "./images/foodtruck-4.png",
+      "recipes": []
     },
     {
       "id": 2,
       "name": "Kristina",
       "foodTruckType": "Tacos",
-      "foodTruckTypeImage": "./images/foodtruck-5.png"
+      "foodTruckTypeImage": "./images/foodtruck-5.png",
+      "recipes": []
     },
     {
       "id": 3,
@@ -20,14 +22,14 @@
       "recipes": []
     }
   ],
-  "comments": [
+  "someOtherRouteOfData": [
     {
       "id": 1,
       "body": "some comment",
       "postId": 1
     }
   ],
-  "profile": {
-    "name": "typicode"
+  "yetAnotherRouteOfData": {
+    "name": "some name"
   }
 }

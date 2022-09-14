@@ -68,20 +68,13 @@ body {
   min-width: 256px;
   max-width: 256px;
 }
+
 [id^="foodtruckHeadlight"] {
   margin-left: -8px;
   margin-right: 0px;
   margin-top: 82px;
   margin-bottom: 12px;
 }
-
-/* displays when dark mode is enabled */
-/* img#foodtruckHeadlight {
-  margin-left: -8px;
-  margin-right: 0px;
-  margin-top: 82px;
-  margin-bottom: 12px;
-} */
 
 [id^="foodtruckHeadlightOff"] {
   /* margin: 13px; */
@@ -90,13 +83,6 @@ body {
   margin-top: 82px;
   margin-bottom: 12px;
 }
-
-/* img#foodtruckHeadlightOff {
-  margin-left: -8px;
-  margin-right: 0px;
-  margin-top: 82px;
-  margin-bottom: 12px;
-} */
 
 .lightOff {
   display: none;

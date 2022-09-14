@@ -11,16 +11,23 @@ function giveMeDarkMode(i) {
   let darkModeButtonDefault = document.getElementById("toggleDarkMode"); //gets the toggleDarkMode button
   bodyDefault.classList.add("dark"); //adds the class "dark" to the body tag
 
-  let trucklightDefault = document.getElementById(`foodtruckHeadlight-${i}`); //gets the truck light
+  let trucklightOnDefault = document.getElementById(`foodtruckHeadlight-${i}`); //gets the truck light
   let trucklightOffDefault = document.getElementById(
     `foodtruckHeadlightOff-${i}` //gets the truck light off
   );
 
+  let foodTruckLightOnDefaultClass = document.querySelectorAll(
+    `.foodTruckHeadlightOn`
+  ); //gets the truck light
+  let foodTruckLightOffDefaultClass = document.querySelectorAll(
+    `.foodTruckHeadlightOff`
+  ); //gets the truck light off
+
   //hide foodTruckCoin
   let foodTruckCoinDefault = document.getElementById(`foodTruckCoin-${i}`); //gets the foodTruckCoin
   foodTruckCoinDefault.style.display = "none"; //hides the foodTruckCoin
+
   let truckRoadImage = document.getElementById("truckRoadImage"); //gets the truckRoadImage
-  //darken truckRoadImage
   truckRoadImage.style.filter = "brightness(0.2)"; //darkens the truckRoadImage
 
   //if dark mode add class moon to body
@@ -55,15 +62,13 @@ function giveMeDarkMode(i) {
         button.classList.remove("dark");
         button.classList.add("light");
 
-        //set navbar to bg-light
-
-        trucklightDefault.classList.remove("lightOn");
-        trucklightOffDefault.classList.remove("lightOff");
-
-        trucklightDefault.classList.add("lightOff");
-        trucklightOffDefault.classList.add("lightOn");
-        //bright truckRoadImage
         truckRoadImage.style.filter = "brightness(1)";
+
+        // foodTruckLightOnDefaultClass display none
+        for (let i = 0; i < foodTruckLightOnDefaultClass.length; i++) {
+          foodTruckLightOnDefaultClass[i].style.display = "none";
+          foodTruckLightOffDefaultClass[i].style.display = "unset";
+        }
       }
       // if pageBody is light, remove light and sun classes and add dark and moon classes
       else if (pageBody.classList.contains("light")) {
@@ -82,13 +87,13 @@ function giveMeDarkMode(i) {
         button.classList.remove("light");
         button.classList.add("dark");
 
-        trucklightDefault.classList.remove("lightOff");
-        trucklightOffDefault.classList.remove("lightOn");
-
-        trucklightDefault.classList.add("lightOn");
-        trucklightOffDefault.classList.add("lightOff");
-        //darken truckRoadImage
         truckRoadImage.style.filter = "brightness(0.2)";
+
+        // foodTruckLightOffDefaultClass display none
+        for (let i = 0; i < foodTruckLightOffDefaultClass.length; i++) {
+          foodTruckLightOffDefaultClass[i].style.display = "none";
+          foodTruckLightOnDefaultClass[i].style.display = "unset";
+        }
       }
     };
     toggleMultipleClasses(pageBody);
@@ -129,44 +134,45 @@ getFoodDataFromAPI.then(function () {
       //append food truck instances to the foodTruckContainer
       $("#truckRoad").append(
         html`
-         <div class="foodTruckContainer" id="foodTruckContainer-${i}">
-        <div id="foodtruck-${i}">
-        <img
-        class="foodTruckImage"
-        src="${allFoodTrucksData[i].foodTruckTypeImage}"
-        alt="Snow"
-        style="width: 25%"
-      />
-      <div class="bottom-left">Bottom Left</div>
-      <div class="top-left">Top Left</div>
-      <div class="top-right">Top Right</div>
-      <div class="bottom-right">Bottom Right</div>
-      <div class="centered">${allFoodTrucksData[i].name}</div>
-      <img
-        id="foodTruckCoin-${i}"
-        src="./images/coinnobg.gif"
-        style="width: 10%; top: 35px; left: 125px"
-      />
-      <img
-        id="foodtruckHeadlight-${i}"
-        src="./images/foodtruck-headlights.png"
-        style="width: 25%"
-        class="lightOn"
-      />
-      <img
-        id="foodtruckHeadlightOff-${i}"
-        src="./images/foodtruck-headlightsOFF.png"
-        style="width: 25%; pointer-events: none"
-        class="lightOff"
-      />
-    </div>
-        </div>
-        </div>
+          <div class="foodTruckContainer" id="foodTruckContainer-${i}">
+            <div id="foodtruck-${i}">
+              <img
+                class="foodTruckImage"
+                src="${allFoodTrucksData[i].foodTruckTypeImage}"
+                alt="food truck image"
+                style="width: 25%"
+              />
+              <div class="bottom-left">Bottom Left</div>
+              <div class="top-left">Top Left</div>
+              <div class="top-right">Top Right</div>
+              <div class="bottom-right">Bottom Right</div>
+              <div class="centered">${allFoodTrucksData[i].name}</div>
+              <img
+                id="foodTruckCoin-${i}"
+                src="./images/coinnobg.gif"
+                style="width: 10%; top: 35px; left: 125px"
+              />
+              <img
+                class="foodTruckHeadlightOff"
+                id="foodtruckHeadlightOff-${i}"
+                src="./images/foodtruck-headlightsOFF.png"
+                style="width: 25%; display: none;"
+                class="lightOff"
+              />
+              <img
+                class="foodTruckHeadlightOn"
+                id="foodtruckHeadlight-${i}"
+                src="./images/foodtruck-headlights.png"
+                style="width: 25%"
+                class="lightOn"
+              />
+            </div>
+          </div>
         `
       );
       // Starts the foodTruck
       startFoodTruckCoins(i);
-      // moveFoodTruck(i);
+      moveFoodTruck(i);
 
       //Sets everything to default dark mode.
       giveMeDarkMode(i);
@@ -175,8 +181,6 @@ getFoodDataFromAPI.then(function () {
     console.log("after for loop");
 
     //TODO: Animate image to move from the left to right of the screen
-
-    let foodTruckContainer = document.getElementById("foodTruckContainer-1");
 
     function startFoodTruckCoins(coinsId) {
       // on click display foodTruckCoin and move up and down
