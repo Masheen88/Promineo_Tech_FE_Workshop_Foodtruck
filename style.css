@@ -1,14 +1,26 @@
+/* popup should appear on top of the screen */
+.popup {
+  position: fixed;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  color: white;
+  background-color: #111111ec;
+  z-index: 100;
+  /* display: none; */
+}
+
 /* Dark/Light Mode - Begin */
 /* Toggles background color based on dark or light mode classes */
 
-body.dark {
-  color: white;
-  background-color: black;
-}
-
 body.light {
   color: black;
-  background-color: white;
+  background-color: #ffffff;
+}
+
+body.dark {
+  color: #ffffff;
+  background-color: #000000;
 }
 
 /* Toggles dark/light mode button on dark or light mode classes */

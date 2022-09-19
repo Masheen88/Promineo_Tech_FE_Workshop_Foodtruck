@@ -18,6 +18,13 @@
       "id": 3,
       "name": "Stephanie",
       "foodTruckType": "Chinese",
+      "foodTruckTypeImage": "./images/foodtruck-2.png",
+      "recipes": []
+    },
+    {
+      "id": 3,
+      "name": "Tyler",
+      "foodTruckType": "Shrimp",
       "foodTruckTypeImage": "./images/foodtruck-6.png",
       "recipes": []
     }
