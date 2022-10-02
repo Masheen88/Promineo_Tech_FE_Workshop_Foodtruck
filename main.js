@@ -51,12 +51,11 @@ class FoodTruckApp {
     const html = String.raw;
     //toggle dark mode with button id "toggleDarkMode"
 
-    function giveMeDarkMode(i) {
+    function giveMeDarkMode() {
       console.log("Dark Mode Go!");
-      let toggleDarkMode = document.getElementById("toggleDarkMode");
 
       //enables dark mode by default.
-
+      let toggleDarkMode = document.getElementById("toggleDarkMode");
       let darkModeButtonDefault = document.getElementById("toggleDarkMode"); //gets the toggleDarkMode button
       bodyDefault.classList.add("dark"); //adds the class "dark" to the body tag
 
@@ -66,10 +65,9 @@ class FoodTruckApp {
       let foodTruckLightOffDefaultClass = document.querySelectorAll(
         `.foodTruckHeadlightOff`
       ); //gets the truck light off
+      console.log("light off length:", foodTruckLightOffDefaultClass.length);
 
       //hide foodTruckCoin
-      let foodTruckCoinDefault = document.getElementById(`foodTruckCoin-${i}`); //gets the foodTruckCoin
-      foodTruckCoinDefault.style.display = "none"; //hides the foodTruckCoin
 
       let truckRoadImage = document.getElementById("truckRoadImage"); //gets the truckRoadImage
       truckRoadImage.style.filter = "brightness(0.2)"; //darkens the truckRoadImage
@@ -81,6 +79,7 @@ class FoodTruckApp {
       }
 
       //toggle dark mode with button id "toggleDarkMode"
+
       toggleDarkMode.addEventListener("click", function () {
         let pageBody = document.getElementsByTagName("body")[0]; //gets the body element
 
@@ -90,20 +89,12 @@ class FoodTruckApp {
 
           // if body is dark, remove dark and moon classes and add light and sun classes
           if (pageBody.classList.contains("dark")) {
-            navbar.classList.remove("bg-black");
-            navbar.classList.remove("bg-dark");
-            navbar.classList.remove("navbar-dark");
-
-            navbar.classList.add("bg-light");
-            navbar.classList.add("navbar-light");
-
-            pageBody.classList.remove("dark");
-            pageBody.classList.remove("moon");
-
-            pageBody.classList.add("light");
-            pageBody.classList.add("sun");
-
+            navbar.classList.remove("bg-black", "bg-dark", "navbar-dark");
+            pageBody.classList.remove("dark", "moon");
             button.classList.remove("dark");
+
+            navbar.classList.add("bg-light", "navbar-light");
+            pageBody.classList.add("light", "sun");
             button.classList.add("light");
 
             truckRoadImage.style.filter = "brightness(1)";
@@ -130,19 +121,12 @@ class FoodTruckApp {
           }
           // if pageBody is light, remove light and sun classes and add dark and moon classes
           else if (pageBody.classList.contains("light")) {
-            navbar.classList.remove("bg-light");
-            navbar.classList.remove("navbar-light");
-
-            navbar.classList.add("bg-black");
-            navbar.classList.add("navbar-dark");
-
-            pageBody.classList.remove("light");
-            pageBody.classList.remove("sun");
-
-            pageBody.classList.add("dark");
-            pageBody.classList.add("moon");
-
+            navbar.classList.remove("bg-light", "navbar-light");
+            pageBody.classList.remove("light", "sun");
             button.classList.remove("light");
+
+            navbar.classList.add("bg-black", "bg-dark", "navbar-dark");
+            pageBody.classList.add("dark", "moon");
             button.classList.add("dark");
 
             truckRoadImage.style.filter = "brightness(0.2)";
@@ -171,7 +155,7 @@ class FoodTruckApp {
       });
     }
     //* Dark/Light Mode - End
-
+    // ? blue comments are for testing
     //! Rest of Code Goes below here -------------------------------------------------
 
     //TODO: Pull in API data for food truck instances
@@ -232,7 +216,7 @@ wait for the data to return before moving to the next function
                     <img
                       id="foodTruckCoin-${i}"
                       src="./images/coinnobg.gif"
-                      style="width: 10%; top: 35px; left: 125px"
+                      style="width: 10%; top: 35px; left: 125px; display: none"
                     />
                     <img
                       class="foodTruckHeadlightOff"
@@ -254,8 +238,10 @@ wait for the data to return before moving to the next function
             `
           );
 
-          //Sets everything to default dark mode.
-          giveMeDarkMode(i);
+          // forces the function to only run once when the last food truck is created
+          if (i === allFoodTrucksData.length - 1) {
+            giveMeDarkMode(); //Sets everything to default dark mode.
+          }
           // Starts the foodTruck
           startFoodTruckCoins(i);
           // delay the moveFoodTruck function by a random time
