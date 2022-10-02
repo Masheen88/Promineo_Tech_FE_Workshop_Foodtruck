@@ -100,7 +100,6 @@ class FoodTruckApp {
             truckRoadImage.style.filter = "brightness(1)";
 
             // change music if dark mode
-
             bgMusicDark.pause();
             bgMusic.volume = 0.05;
             bgMusic.play();
@@ -185,12 +184,31 @@ wait for the data to return before moving to the next function
         //wait for
       } else {
         //for loop to create food truck instances
-        for (let i = 0; i < allFoodTrucksData.length; i++) {
+
+        // get 10 random foodtrucks from allFoodTrucksData and push to randomFoodTrucksData array, remove duplicates
+        let randomFoodTrucksData = [];
+        while (randomFoodTrucksData.length < 10) {
+          let randomFoodTruck =
+            allFoodTrucksData[
+              Math.floor(Math.random() * allFoodTrucksData.length)
+            ];
+          if (randomFoodTrucksData.indexOf(randomFoodTruck) === -1) {
+            randomFoodTrucksData.push(randomFoodTruck);
+          }
+
+          //if no more trucks can be added to randomFoodTrucksData, break out of loop
+          if (randomFoodTrucksData.length === allFoodTrucksData.length) {
+            break;
+          }
+        }
+        console.log("randomFoodTrucksData:", randomFoodTrucksData);
+
+        for (let i = 0; i < randomFoodTrucksData.length; i++) {
           console.log(
             "loop iteration:",
             i,
             `allFoodTrucksData:`,
-            allFoodTrucksData[i]
+            randomFoodTrucksData[i]
           );
 
           //append food truck instance to foodTruckLane 1, 2, or 3 at random
@@ -199,12 +217,12 @@ wait for the data to return before moving to the next function
           //append food truck instances to the foodTruckContainer
           $(`#truckLane${foodTruckLane}`).append(
             html`
-              <span>
+              <span id="foodTruckSpan-${i}" class="bounce">
                 <div class="foodTruckContainer" id="foodTruckContainer-${i}">
                   <div id="foodtruck-${i}">
                     <img
                       class="foodTruckImage"
-                      src="${allFoodTrucksData[i].foodTruckTypeImage}"
+                      src="${randomFoodTrucksData[i].foodTruckTypeImage}"
                       alt="food truck image"
                       style="width: 25%"
                     />
@@ -212,7 +230,7 @@ wait for the data to return before moving to the next function
                     <div class="top-left">Top Left</div>
                     <div class="top-right">Top Right</div>
                     <div class="bottom-right">Bottom Right</div>
-                    <div class="centered">${allFoodTrucksData[i].name}</div>
+                    <div class="centered">${randomFoodTrucksData[i].name}</div>
                     <img
                       id="foodTruckCoin-${i}"
                       src="./images/coinnobg.gif"
@@ -238,14 +256,15 @@ wait for the data to return before moving to the next function
             `
           );
 
-          // forces the function to only run once when the last food truck is created
-          if (i === allFoodTrucksData.length - 1) {
-            giveMeDarkMode(); //Sets everything to default dark mode.
-          }
           // Starts the foodTruck
           startFoodTruckCoins(i);
           // delay the moveFoodTruck function by a random time
           moveFoodTruck(i);
+
+          // forces the function to only run once when the last food truck is created
+          if (i === randomFoodTrucksData.length - 1) {
+            giveMeDarkMode(); //Sets everything to default dark mode.
+          }
         }
 
         console.log("after for loop");
@@ -253,12 +272,10 @@ wait for the data to return before moving to the next function
         //TODO: Animate image to move from the left to right of the screen
 
         function startFoodTruckCoins(coinsId) {
+          console.log("startFoodTruckCoins", coinsId);
           // on click display foodTruckCoin and move up and down
-          $(`#foodTruckContainer-${coinsId}`).click(function () {
-            console.log(
-              "truck is 1 is clicked",
-              $(`#foodTruckCoin-${coinsId}`)
-            );
+          $(`#foodTruckSpan-${coinsId}`).click(function () {
+            console.log("truck clicked", $(`#foodTruckCoin-${coinsId}`));
             let foodTruckCoin = $(`#foodTruckCoin-${coinsId}`);
 
             //append jquery css to foodTruckCoin
@@ -303,16 +320,13 @@ wait for the data to return before moving to the next function
 
             $(`#foodTruckContainer-${truckId}`).animate(
               {
-                left: "+=3000", //moves truck from left to right
-                bounce: 1000,
+                left: "+=7680", //moves truck from left to right
               },
               randomizeSpeed(), //animation speed
               function () {
                 // Animation complete.
 
                 resetTruck(truckId);
-                // randomly move truck to a new lane
-                // moveFoodTruckToNewLane(truckId);
               }
             );
           }, delay());
@@ -323,7 +337,7 @@ wait for the data to return before moving to the next function
           console.log(`truck #${truckId} is resetting`);
           $(`#foodTruckContainer-${truckId}`).animate(
             {
-              left: "-=3000", //moves truck from right to left (resets it to offscreen)
+              left: "-=7680", //moves truck from right to left (resets it to offscreen)
             },
             0, //animation speed
             function () {
@@ -334,7 +348,7 @@ wait for the data to return before moving to the next function
               function moveFoodTruckToNewLane(truckId) {
                 console.log(`truck #${truckId} is moving to a new lane`);
                 //get current lane
-                let currentLane = $(`#foodTruckContainer-${truckId}`)
+                let currentLane = $(`#foodTruckSpan-${truckId}`)
                   .parent()
                   .attr("id");
                 console.log("current lane", currentLane);
@@ -345,7 +359,7 @@ wait for the data to return before moving to the next function
 
                 //move truck to new lane
                 $(`#truckLane${newLane}`).append(
-                  $(`#foodTruckContainer-${truckId}`)
+                  $(`#foodTruckSpan-${truckId}`)
                 );
               }
 
@@ -361,10 +375,10 @@ wait for the data to return before moving to the next function
           let randomNumber = Math.floor(Math.random() * 1000) + 1;
           //2% chance to deliver food SUPER FAST!
           if (randomNumber <= 2) {
-            return Math.floor(Math.random() * (3000 - 1000 + 1)) + 1000;
+            return Math.floor(Math.random() * (3000 - 1000 + 1)) + 100;
           } else {
             // return a random number between 15 and 30 seconds
-            return Math.floor(Math.random() * (3000 - 1500 + 1)) + 15000;
+            return Math.floor(Math.random() * (6000 - 80000 + 1)) + 60000;
           }
         }
 
@@ -378,7 +392,7 @@ wait for the data to return before moving to the next function
             html`
               <div class="truckOrderingMenu">
                 <div class="truckOrderingMenuHeader">
-                  <h2>${allFoodTrucksData[truckId].name}</h2>
+                  <h2>${randomFoodTrucksData[truckId].name}</h2>
                   <h3>Menu</h3>
                   <!-- button to close the menu -->
                   <button id="closeMenuButton">X</button>
