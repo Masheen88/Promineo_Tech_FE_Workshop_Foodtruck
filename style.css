@@ -218,6 +218,28 @@ body {
   margin: 2%;
 }
 
+/* orderStats Menu should appear on top of truckOrderMenu */
+.truckOrderStatsMenu {
+  border: solid 1px white;
+  background-color: rgba(240, 248, 255, 0.259);
+  /* padding: 4%; */
+  width: 25%;
+  position: absolute;
+  text-align: center;
+  top: 20%;
+  left: 50%;
+  z-index: +1;
+}
+
+#truckOrderStatsContainer1,
+#truckOrderStatsContainer2,
+#truckOrderStatsContainer3 {
+  background-color: rgba(240, 248, 255, 0.259);
+  /* padding: 2%; */
+  width: 75%;
+  margin: 2%;
+}
+
 /* bouncing? */
 .bounce {
   position: relative;
@@ -238,4 +260,13 @@ body {
   100% {
     bottom: 0;
   }
+}
+
+/* Menu Ordering Styling */
+input#recipe1Quantity,
+input#recipe2Quantity,
+input#recipe3Quantity {
+  max-width: 15%;
+  text-align: center;
+  margin-bottom: 5px;
 }

@@ -52,7 +52,7 @@ class FoodTruckApp {
     //toggle dark mode with button id "toggleDarkMode"
 
     function giveMeDarkMode() {
-      console.log("Dark Mode Go!");
+      // console.log("Dark Mode Go!");
 
       //enables dark mode by default.
       let toggleDarkMode = document.getElementById("toggleDarkMode");
@@ -65,7 +65,7 @@ class FoodTruckApp {
       let foodTruckLightOffDefaultClass = document.querySelectorAll(
         `.foodTruckHeadlightOff`
       ); //gets the truck light off
-      console.log("light off length:", foodTruckLightOffDefaultClass.length);
+      // console.log("light off length:", foodTruckLightOffDefaultClass.length);
 
       //hide foodTruckCoin
 
@@ -204,12 +204,12 @@ wait for the data to return before moving to the next function
         console.log("randomFoodTrucksData:", randomFoodTrucksData);
 
         for (let i = 0; i < randomFoodTrucksData.length; i++) {
-          console.log(
-            "loop iteration:",
-            i,
-            `allFoodTrucksData:`,
-            randomFoodTrucksData[i]
-          );
+          // console.log(
+          //   "loop iteration:",
+          //   i,
+          //   `allFoodTrucksData:`,
+          //   randomFoodTrucksData[i]
+          // );
 
           //append food truck instance to foodTruckLane 1, 2, or 3 at random
           let foodTruckLane = Math.floor(Math.random() * 3) + 1; //random number between 1 and 3
@@ -267,15 +267,15 @@ wait for the data to return before moving to the next function
           }
         }
 
-        console.log("after for loop");
+        // console.log("after for loop");
 
         //TODO: Animate image to move from the left to right of the screen
 
         function startFoodTruckCoins(coinsId) {
-          console.log("startFoodTruckCoins", coinsId);
+          // console.log("startFoodTruckCoins", coinsId);
           // on click display foodTruckCoin and move up and down
           $(`#foodTruckSpan-${coinsId}`).click(function () {
-            console.log("truck clicked", $(`#foodTruckCoin-${coinsId}`));
+            // console.log("truck clicked", $(`#foodTruckCoin-${coinsId}`));
             let foodTruckCoin = $(`#foodTruckCoin-${coinsId}`);
 
             //append jquery css to foodTruckCoin
@@ -307,7 +307,7 @@ wait for the data to return before moving to the next function
         //TODO: Animate image to move from the left to right of the screen
         function moveFoodTruck(truckId) {
           $(`#foodTruckContainer-${truckId}`).css("left", "-1000px");
-          console.log("truck is 1 is moving");
+          // console.log(`truck is ${truckId} is moving`);
 
           function delay() {
             //return random number between 1 and 5 seconds
@@ -316,7 +316,7 @@ wait for the data to return before moving to the next function
 
           //puts a delay between each truck at random
           setTimeout(function () {
-            console.log("Why won't this truck start?!?!");
+            // console.log("Why won't this truck start?!?!");
 
             $(`#foodTruckContainer-${truckId}`).animate(
               {
@@ -334,7 +334,7 @@ wait for the data to return before moving to the next function
 
         // reset truck to off screen to the left and move it to the right
         function resetTruck(truckId) {
-          console.log(`truck #${truckId} is resetting`);
+          // console.log(`truck #${truckId} is resetting`);
           $(`#foodTruckContainer-${truckId}`).animate(
             {
               left: "-=7680", //moves truck from right to left (resets it to offscreen)
@@ -346,16 +346,16 @@ wait for the data to return before moving to the next function
 
               //move existing truck to a new lane
               function moveFoodTruckToNewLane(truckId) {
-                console.log(`truck #${truckId} is moving to a new lane`);
+                // console.log(`truck #${truckId} is moving to a new lane`);
                 //get current lane
                 let currentLane = $(`#foodTruckSpan-${truckId}`)
                   .parent()
                   .attr("id");
-                console.log("current lane", currentLane);
+                // console.log("current lane", currentLane);
 
                 //get new lane
                 let newLane = Math.floor(Math.random() * 3) + 1; //random number between 1 and 3
-                console.log("new lane", newLane);
+                // console.log("new lane", newLane);
 
                 //move truck to new lane
                 $(`#truckLane${newLane}`).append(
@@ -382,18 +382,19 @@ wait for the data to return before moving to the next function
           }
         }
 
-        //TODO: Need function to build recipe using ingredients and add it to a list (API)
-
         //TODO: Allow user to select from list of recipes and order them
         function orderFood(truckId) {
           console.log("Ordering Food");
           //displays a popup form with the food truck's menu inside truckOrderingMenu
+          console.log("order food", randomFoodTrucksData[truckId].recipes);
           $(`#truckOrderingMenu`).html(
             html`
               <div class="truckOrderingMenu">
                 <div class="truckOrderingMenuHeader">
                   <h2>${randomFoodTrucksData[truckId].name}</h2>
                   <h3>Menu</h3>
+                  <!-- order Status link -->
+                  <Button id="orderStatusLink">Order Stats</Button>
                   <!-- button to close the menu -->
                   <button id="closeMenuButton">X</button>
                 </div>
@@ -401,26 +402,64 @@ wait for the data to return before moving to the next function
                   <div class="truckOrderingMenuBodyLeft">
                     <div class="truckOrderingMenuBodyLeftTop">
                       <h4>Food</h4>
-                      <div class="truckOrderingMenuBodyLeftTopFood">
-                        <div class="truckOrderingMenuBodyLeftTopFoodItem">
-                          <h5>Item 1</h5>
-                          <p>Price: $1.00</p>
-                          <p>Calories: 100</p>
-                          <p>Ingredients: 1, 2, 3</p>
+                      <form id="orderForm"}">
+                        <div class="truckOrderingMenuBodyLeftTopFood">
+                          <div class="truckOrderingMenuBodyLeftTopFoodItem">
+                            <h5 id="recipe1Name">
+                              ${randomFoodTrucksData[truckId].recipes[0].recipe1}
+                            </h5>
+                            <p>Price: $1.00</p>
+                            <p>Calories: 100</p>
+                            <p>Ingredients: 1, 2, 3</p>
+
+                            <labal>Qty: </labal>
+                            <input
+                              type="number"
+                              id="recipe1Quantity"
+                              name="recipe1Quantity"
+                              min="0"
+                              value= "0"
+                            />
+                          </div>
+                          <div class="truckOrderingMenuBodyLeftTopFoodItem">
+                            <h5 id="recipe2Name">
+                              ${randomFoodTrucksData[truckId].recipes[0].recipe2}
+                            </h5>
+                            <p>Price: $1.00</p>
+                            <p>Calories: 100</p>
+                            <p>Ingredients: 1, 2, 3</p>
+                            <labal>Qty: </labal>
+                            <input
+                              type="number"
+                              id="recipe2Quantity"
+                              name="recipe2Quantity"
+                              min="0"
+                              value= "0"
+                            />
+                          </div>
+                          <div class="truckOrderingMenuBodyLeftTopFoodItem">
+                            <h5 id="recipe3Name">
+                              ${randomFoodTrucksData[truckId].recipes[0].recipe3}
+                            </h5>
+                            <p>Price: $1.00</p>
+                            <p>Calories: 100</p>
+                            <p>Ingredients: 1, 2, 3</p>
+                            <labal>Qty: </labal>
+                            <input
+                              type="number"
+                              id="recipe3Quantity"
+                              name="recipe3Quantity"
+                              min="0"
+                              value= "0"
+                            />
+                          </div>
                         </div>
-                        <div class="truckOrderingMenuBodyLeftTopFoodItem">
-                          <h5>Item 2</h5>
-                          <p>Price: $1.00</p>
-                          <p>Calories: 100</p>
-                          <p>Ingredients: 1, 2, 3</p>
-                        </div>
-                        <div class="truckOrderingMenuBodyLeftTopFoodItem">
-                          <h5>Item 3</h5>
-                          <p>Price: $1.00</p>
-                          <p>Calories: 100</p>
-                          <p>Ingredients: 1, 2, 3</p>
-                        </div>
-                      </div>
+                        <h2 id="OrderError"></h2>
+                        <h3 id="OrderSuccess"></h3>
+                        <button type="submit" id="submitOrderButton">
+                          Submit Order
+                        </button>
+                      </form>
                     </div>
                   </div>
                 </div>
@@ -428,11 +467,208 @@ wait for the data to return before moving to the next function
             `
           );
 
+          let orderForm = document.querySelector("#orderForm");
+          orderForm.addEventListener("submit", placeOrder, true);
+
+          let orderStats = document.querySelector("#orderStatusLink");
+          orderStats.addEventListener("click", viewOrderStats, true);
+
           // close menu button
           $(`#closeMenuButton`).click(function () {
             $(`#truckOrderingMenu`).html("");
           });
+
+          function viewOrderStats() {
+            console.log("view order stats");
+            $(`#truckOrderingMenu`).html(
+              html`
+                <div class="truckOrderStatsMenu">
+                  <div class="truckOrderStatsHeader">
+                    <h2>${randomFoodTrucksData[truckId].name}</h2>
+                    <h3>Order Stats</h3>
+                    <!-- button to close the menu -->
+                    <button id="closeMenuButton">X</button>
+                  </div>
+                  <div class="truckOrderStatsBody">
+                    <div class="truckOrderStatsBodyLeft">
+                      <div class="truckOrderStatsContainer">
+                        <h5>Orders Taken</h5>
+                        <div>
+                          <div id="truckOrderStatsContainer1">
+                            <h5 id="recipe1Name">
+                              ${randomFoodTrucksData[truckId].recipes[0]
+                                .recipe1}
+                            </h5>
+                            <p>
+                              ${randomFoodTrucksData[truckId].orders[0]
+                                .recipe1Qty}
+                            </p>
+                          </div>
+                          <div id="truckOrderStatsContainer2">
+                            <h5 id="recipe1Name">
+                              ${randomFoodTrucksData[truckId].recipes[0]
+                                .recipe2}
+                            </h5>
+                            <p>
+                              ${randomFoodTrucksData[truckId].orders[0]
+                                .recipe2Qty}
+                            </p>
+                          </div>
+                          <div id="truckOrderStatsContainer3">
+                            <h5 id="recipe1Name">
+                              ${randomFoodTrucksData[truckId].recipes[0]
+                                .recipe3}
+                            </h5>
+                            <p>
+                              ${randomFoodTrucksData[truckId].orders[0]
+                                .recipe3Qty}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              `
+            );
+
+            // close menu button and go back to menu
+
+            $(`#closeMenuButton`).click(function () {
+              $(`#truckOrderingMenu`).html("");
+              orderFood(truckId);
+            });
+          }
+
+          function placeOrder(event) {
+            event.preventDefault();
+            //display error if any of the fields are empty
+            if (
+              $(`#recipe1Quantity`).val() == "" ||
+              $(`#recipe2Quantity`).val() == "" ||
+              $(`#recipe3Quantity`).val() == ""
+            ) {
+              console.log("Please fill out all fields before submitting");
+              //display html error message
+              $(`#OrderError`).html(
+                html`
+                  <div>
+                    <h3>Order Error</h3>
+                    <p>One or more fields are empty</p>
+                    <button id="closeOrderError">X</button>
+                  </div>
+                `
+              );
+              //close menu button
+              $(`#closeOrderError`).click(function () {
+                $(`#OrderError`).html("");
+              });
+
+              return;
+            }
+
+            console.log("place order");
+            //get recipe1Quantity on submit
+            let recipe1Quantity = $(`#recipe1Quantity`).val();
+            console.log("recipe1Quantity", recipe1Quantity);
+            let recipe2Quantity = $(`#recipe2Quantity`).val();
+            console.log("recipe2Quantity", recipe2Quantity);
+            let recipe3Quantity = $(`#recipe3Quantity`).val();
+            console.log("recipe3Quantity", recipe3Quantity);
+
+            //get the name of each item ordered
+            let recipe1Name = $(`#recipe1Name`).val();
+            console.log("recipe1Name:", recipe1Name);
+            let recipe2Name = $(`#recipe2Name`).val();
+            console.log("recipe2Name:", recipe2Name);
+            let recipe3Name = $(`#recipe3Name`).val();
+            console.log("recipe3Name:", recipe3Name);
+
+            let currentOrderQty1 = parseInt(
+              randomFoodTrucksData[truckId].orders[0].recipe1Qty
+            );
+            console.log("currentOrderQty1:", currentOrderQty1);
+            let currentOrderQty2 = parseInt(
+              randomFoodTrucksData[truckId].orders[0].recipe2Qty
+            );
+            console.log("currentOrderQty2:", currentOrderQty2);
+            let currentOrderQty3 = parseInt(
+              randomFoodTrucksData[truckId].orders[0].recipe3Qty
+            );
+            console.log("currentOrderQty3:", currentOrderQty3);
+
+            // add the new order to the current order
+            let newOrderQty1 = parseInt(recipe1Quantity) + currentOrderQty1;
+            console.log("newOrderQty1:", newOrderQty1);
+            let newOrderQty2 = parseInt(recipe2Quantity) + currentOrderQty2;
+            console.log("newOrderQty2:", newOrderQty2);
+            let newOrderQty3 = parseInt(recipe3Quantity) + currentOrderQty3;
+            console.log("newOrderQty3:", newOrderQty3);
+
+            // push newOrderQty1 to foodTruckData array and update the API
+            randomFoodTrucksData[truckId].orders[0] = {
+              recipe1Qty: newOrderQty1,
+              recipe2Qty: newOrderQty2,
+              recipe3Qty: newOrderQty3,
+            };
+            console.log(
+              "randomFoodTrucksData before API Update",
+              randomFoodTrucksData[truckId].orders[0]
+            );
+
+            // set values back to default
+            $(`#recipe1Quantity`).val("0");
+            $(`#recipe2Quantity`).val("0");
+            $(`#recipe3Quantity`).val("0");
+            $(`#OrderError`).html("");
+
+            //display order success message for 3 seconds
+
+            //disable button for 3 seconds
+            $(`#submitOrderButton`).prop("disabled", true);
+            setTimeout(function () {
+              $(`#submitOrderButton`).prop("disabled", false);
+            }, 3000);
+
+            $(`#OrderSuccess`).html(
+              html`
+                <div>
+                  <h3>Order Success</h3>
+                  <p>Your order has been placed</p>
+                </div>
+              `
+            );
+
+            //TODO: Need function to place order and add it to a list (API)
+            // update the API
+            $.ajax({
+              url: `${foodTruckData}/${randomFoodTrucksData[truckId].id}`,
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              //update orders array with new order
+              data: JSON.stringify({
+                orders: [
+                  {
+                    recipe1Qty: newOrderQty1,
+                    recipe2Qty: newOrderQty2,
+                    recipe3Qty: newOrderQty3,
+                  },
+                ],
+              }),
+              success: function (response) {
+                console.log("response:", response);
+              },
+            });
+            setTimeout(function () {
+              $(`#OrderSuccess`).html("");
+              viewOrderStats(truckId);
+            }, 3000);
+          }
         }
+
+        //TODO: Need function to build recipe using ingredients and add it to a list (API)
 
         //TODO: If recipe is out of stock, prevent selection and alert user
 
