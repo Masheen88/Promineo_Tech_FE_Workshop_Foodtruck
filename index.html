@@ -61,6 +61,7 @@
     <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-black">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">Food Truck App</a>
+
         <button
           class="navbar-toggler"
           type="button"
@@ -72,6 +73,43 @@
         >
           <span class="navbar-toggler-icon"><img src="favicon.ico" /></span>
         </button>
+        <!-- popup trucks with most orders modal - Begin -->
+
+        <!-- button to open modal -->
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+        >
+          Who has the most orders?
+        </button>
+        <div
+          class="modal fade"
+          id="exampleModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="modal-title">
+                  Trucks with the most orders!
+                </h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body" id="modal-body">Woo orders here!</div>
+            </div>
+          </div>
+        </div>
+        <!-- popup trucks with most orders modal - End -->
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <!-- button to toggle between light/dark mode -->

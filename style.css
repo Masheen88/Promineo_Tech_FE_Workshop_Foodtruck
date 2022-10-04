@@ -10,6 +10,11 @@
   /* display: none; */
 }
 
+.modal-header,
+.modal-body {
+  background-color: rgba(0, 0, 0, 0.597);
+}
+
 /* Dark/Light Mode - Begin */
 /* Toggles background color based on dark or light mode classes */
 
@@ -26,14 +31,14 @@ body.dark {
 /* Toggles dark/light mode button on dark or light mode classes */
 .darkButton.dark {
   color: white;
-  background-color: black;
+  background-color: #000000;
   border: 1px solid white;
 }
 
 .darkButton.light {
-  color: black;
+  color: #000000;
   background-color: white;
-  border: 1px solid black;
+  border: 1px solid #000000;
 }
 /* Dark/Light Mode - End */
 

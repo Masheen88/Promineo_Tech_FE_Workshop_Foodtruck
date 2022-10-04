@@ -674,8 +674,33 @@ wait for the data to return before moving to the next function
 
         //TODO: Allow user to create their own food truck instance and add it a list (API)
         //*Can have 3 recipes for each food truck
+        let mostOrdersBody = document.getElementById("modal-body");
 
-        //TODO: Display instances of each food truck on the page randomly
+        //if mostOrdersBody is displayed, display the most orders
+        if (mostOrdersBody) {
+          displayTop5();
+        }
+
+        //display the top 5 food trucks with the most orders
+        function displayTop5() {
+          //sort the food trucks by the number of orders
+          let sortedFoodTrucks = randomFoodTrucksData.sort(function (a, b) {
+            return b.orders[0].recipe1Qty - a.orders[0].recipe1Qty;
+          });
+          console.log("sortedFoodTrucks", sortedFoodTrucks);
+
+          //display the top 5 food trucks with the most orders
+          for (let i = 0; i < 5; i++) {
+            let top5 = document.createElement("div");
+            top5.innerHTML = `
+            <div class="top5">
+              <h3>${sortedFoodTrucks[i].name}</h3>
+              <p>Orders: ${sortedFoodTrucks[i].orders[0].recipe1Qty}</p>
+            </div>
+          `;
+            mostOrdersBody.appendChild(top5);
+          }
+        }
       }
     });
   }
