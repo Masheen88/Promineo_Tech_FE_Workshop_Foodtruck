@@ -1,4 +1,9 @@
-/* if darkmode invert imgLogo */
+/* if landscape mode zoom out all content */
+@media screen and (orientation: landscape) {
+  html {
+    zoom: 0.5;
+  }
+}
 
 /* popup should appear on top of the screen */
 .popup {
@@ -154,7 +159,7 @@ body {
 }
 
 #truckRoadImage {
-  width: 100vw;
+  min-width: 100vw;
   height: 1080px;
   left: 0px;
   top: 125px;
