@@ -674,32 +674,58 @@ wait for the data to return before moving to the next function
 
         //TODO: Allow user to create their own food truck instance and add it a list (API)
         //*Can have 3 recipes for each food truck
-        let mostOrdersBody = document.getElementById("modal-body");
+        let mostOrdersButton = document.getElementById("totalOrdersModalBtn");
 
-        //if mostOrdersBody is displayed, display the most orders
-        if (mostOrdersBody) {
-          displayTop5();
-        }
+        //each time mostOrdersButton is clicked,   displayTop5() is called
+        mostOrdersButton.addEventListener("click", displayTop5());
+
+        //if the modal is closed, clear the modal-body
+        $("#totalOrdersModal").on("hidden.bs.modal", function () {
+          let mostOrdersBody = document.getElementById("modal-body");
+          mostOrdersBody.innerHTML = "";
+          return displayTop5();
+        });
 
         //display the top 5 food trucks with the most orders
         function displayTop5() {
-          //sort the food trucks by the number of orders
-          let sortedFoodTrucks = randomFoodTrucksData.sort(function (a, b) {
-            return b.orders[0].recipe1Qty - a.orders[0].recipe1Qty;
-          });
-          console.log("sortedFoodTrucks", sortedFoodTrucks);
-
-          //display the top 5 food trucks with the most orders
-          for (let i = 0; i < 5; i++) {
-            let top5 = document.createElement("div");
-            top5.innerHTML = `
-            <div class="top5">
-              <h3>${sortedFoodTrucks[i].name}</h3>
-              <p>Orders: ${sortedFoodTrucks[i].orders[0].recipe1Qty}</p>
-            </div>
-          `;
-            mostOrdersBody.appendChild(top5);
+          // get new list of truck data from the API using async and await
+          async function getTruckData() {
+            const response = await fetch(foodTruckData);
+            const updatedData = await response.json();
+            return updatedData;
           }
+          //call the async function
+          getTruckData().then((updatedData) => {
+            //sort the updatedData by the most orders
+            updatedData.sort((a, b) => {
+              return (
+                b.orders[0].recipe1Qty +
+                b.orders[0].recipe2Qty +
+                b.orders[0].recipe3Qty -
+                (a.orders[0].recipe1Qty +
+                  a.orders[0].recipe2Qty +
+                  a.orders[0].recipe3Qty)
+              );
+            });
+            //display the top 5 food trucks once the updatedData has been returned
+            for (let i = 0; i < 5; i++) {
+              let mostOrdersBody = document.getElementById("modal-body");
+              mostOrdersBody.innerHTML += `
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">${updatedData[i].name}</h5>
+                    <p class="card-text">Total Orders: ${
+                      updatedData[i].orders[0].recipe1Qty +
+                      updatedData[i].orders[0].recipe2Qty +
+                      updatedData[i].orders[0].recipe3Qty
+                    }</p>
+                  </div>
+                </div>
+              `;
+            }
+            return;
+          });
+          //Function Ends Here
         }
       }
     });

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Food Truck App</title>
     <link rel="stylesheet" href="./style.css" />
     <!-- <link
       rel="stylesheet"
@@ -60,7 +60,10 @@
     <!--Navbar - Begin -->
     <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-black">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Food Truck App</a>
+        <a class="navbar-brand" href="#"
+          >Food Truck App
+          <span><img id="imgLogo" src="./images/logo.png" /></span
+        ></a>
 
         <button
           class="navbar-toggler"
@@ -80,15 +83,16 @@
           type="button"
           class="btn btn-primary"
           data-bs-toggle="modal"
-          data-bs-target="#exampleModal"
+          data-bs-target="#totalOrdersModal"
+          id="totalOrdersModalBtn"
         >
           Who has the most orders?
         </button>
         <div
           class="modal fade"
-          id="exampleModal"
+          id="totalOrdersModal"
           tabindex="-1"
-          aria-labelledby="exampleModalLabel"
+          aria-labelledby="totalOrdersModalLabel"
           aria-hidden="true"
         >
           <div class="modal-dialog">
@@ -98,6 +102,7 @@
                   Trucks with the most orders!
                 </h5>
                 <button
+                  id="closeTotalOrdersModal"
                   type="button"
                   class="btn-close"
                   data-bs-dismiss="modal"
@@ -113,7 +118,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <!-- button to toggle between light/dark mode -->
-            <button class="darkButton" id="toggleDarkMode">Dark/Light</button>
+            <button class="darkButton" id="toggleDarkMode">
+              <span id="dark">Dark Mode</span>
+              <span id="light">Light Mode</span>
+            </button>
             <!-- button to play music -->
             <button class="musicButton" id="toggleMusic" style="display: none">
               <i class="bi bi-music-note-list"></i>
