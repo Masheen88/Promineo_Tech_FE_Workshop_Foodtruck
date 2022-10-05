@@ -160,6 +160,7 @@ body {
   top: 125px;
   z-index: 0;
   position: absolute;
+  background-repeat: repeat;
 }
 
 #overlayShadow {
