@@ -159,13 +159,13 @@ body {
 }
 
 #truckRoadImage {
-  min-width: 100vw;
-  height: 1080px;
+  width: 5000px;
+  height: 100%;
   left: 0px;
   top: 125px;
   z-index: 0;
   position: absolute;
-  background-repeat: repeat;
+  background-position-x: right;
 }
 
 #overlayShadow {

@@ -158,6 +158,7 @@ class FoodTruckApp {
     //! Rest of Code Goes below here -------------------------------------------------
 
     //TODO: Pull in API data for food truck instances
+
     //api using JSON-server
     // const foodTruckData = "http://localhost:3000/foodtrucks"; //food truck data from API
 
@@ -334,7 +335,7 @@ wait for the data to return before moving to the next function
 
         // reset truck to off screen to the left and move it to the right
         function resetTruck(truckId) {
-          // console.log(`truck #${truckId} is resetting`);
+          console.log(`truck #${truckId} is resetting`);
           $(`#foodTruckContainer-${truckId}`).animate(
             {
               left: "-=7680", //moves truck from right to left (resets it to offscreen)
@@ -370,7 +371,7 @@ wait for the data to return before moving to the next function
           );
         }
 
-        //randomizeS the speed of the truck
+        //randomizes the speed of the truck
         function randomizeSpeed() {
           let randomNumber = Math.floor(Math.random() * 1000) + 1;
           //2% chance to deliver food SUPER FAST!
