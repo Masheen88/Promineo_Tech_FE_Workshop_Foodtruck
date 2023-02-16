@@ -227,10 +227,10 @@ wait for the data to return before moving to the next function
                       alt="food truck image"
                       style="width: 25%"
                     />
-                    <div class="bottom-left">Bottom Left</div>
-                    <div class="top-left">Top Left</div>
-                    <div class="top-right">Top Right</div>
-                    <div class="bottom-right">Bottom Right</div>
+                    <div class="bottom-left"></div>
+                    <div class="top-left">t</div>
+                    <div class="top-right">t</div>
+                    <div class="bottom-right"></div>
                     <div class="centered">${randomFoodTrucksData[i].name}</div>
                     <img
                       id="foodTruckCoin-${i}"
